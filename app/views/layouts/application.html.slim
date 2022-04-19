@@ -10,4 +10,8 @@ html
     = javascript_pack_tag 'application'
 
   body
-    = yield
+    = render('layouts/shared/nav')
+    = render('layouts/shared/flash')
+
+    .container.my-4
+      == yield

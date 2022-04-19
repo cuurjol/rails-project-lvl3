@@ -1,0 +1,5 @@
+---
+ru:
+  invisible_captcha:
+    sentence_for_humans: Если вы человек, игнорируйте это поле
+    timestamp_error_message: Извините, это было слишком быстро! Пожалуйста, отправьте повторно

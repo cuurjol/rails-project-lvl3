@@ -1,0 +1,18 @@
+---
+ru:
+  mail_form:
+    models:
+      bulletin_contact: Форма обратной связи для объявления
+    bulletin_contact:
+      subject: Новое письмо для вашего объявления
+      main_text_html: >-
+        Вы получили это письмо, потому что вы создали объявление на сайте %{website}
+        и кто-то откликнулся на ваше объявление.
+      info_letter_text: >-
+        Информация о письме:
+    attributes:
+      bulletin_contact:
+        name: Имя отправителя
+        email: Электронная почта
+        message: Сообщение
+        bulletin_id: Ссылка на объявление

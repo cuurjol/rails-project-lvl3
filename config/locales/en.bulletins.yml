@@ -1,0 +1,35 @@
+---
+en:
+  web:
+    bulletins:
+      index:
+        main_title: Listing bulletins
+        search_form_title: Bulletin search form
+        bulletin_button: Open bulletin
+      new:
+        main_title: New bulletin
+      create:
+        success: Bulletin was successfully created
+      show:
+        edit_button: Edit bulletin
+        email_button: Write to owner
+        bulletins_button: Back to bulletins
+      edit:
+        main_title: Editing bulletin
+      update:
+        success: Bulletin was successfully updated
+      form:
+        submit: Save
+        cancel_link: Cancel
+        markdown_support: There is Markdown text support
+      search_form:
+        submit: Search
+        clear_filter_link: Clear
+        title_cont: Title contains
+        user_name_cont: Owner's name contains
+        category_id_eq: Category equal
+      bulletin_contacts:
+        form:
+          submit: Send
+          cancel: Cancel
+          markdown_support: There is Markdown text support

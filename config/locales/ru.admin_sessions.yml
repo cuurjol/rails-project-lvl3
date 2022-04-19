@@ -1,0 +1,14 @@
+---
+ru:
+  web:
+    admin:
+      sessions:
+        new:
+          main_title: Авторизация
+        create:
+          success: Вы успешно вошли в систему как администратор
+          failure: Неверный адрес электронной почты и пароль
+        destroy:
+          success: Вы успешно вышли из системы как администратор
+        form:
+          submit_title: Войти

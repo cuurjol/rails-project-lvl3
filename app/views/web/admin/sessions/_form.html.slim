@@ -1,0 +1,6 @@
+.row
+  .col-4
+    = simple_form_for(:admin_session, url: admin_session_path) do |f|
+      = f.input(:email, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' })
+      = f.input(:password, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' })
+      = f.button(:submit, t('.submit_title'), class: 'btn-success my-2')

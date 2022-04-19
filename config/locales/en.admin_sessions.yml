@@ -1,0 +1,14 @@
+---
+en:
+  web:
+    admin:
+      sessions:
+        new:
+          main_title: Authorization
+        create:
+          success: You have successfully logged in as an admin
+          failure: Invalid email and password
+        destroy:
+          success: You have successfully logged out as an admin
+        form:
+          submit_title: Sign in

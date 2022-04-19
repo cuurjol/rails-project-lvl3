@@ -1,0 +1,24 @@
+---
+en:
+  activerecord:
+    models:
+      user: User
+      category: Category
+      bulletin: Bulletin
+
+    attributes:
+      user:
+        name: Name
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+      category:
+        name: Name
+      bulletin:
+        title: Title
+        description: Description
+        user: Owner
+        category: Category
+        image: Image
+        created_at: Created at
+        updated_at: Updated at

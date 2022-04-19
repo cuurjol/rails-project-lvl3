@@ -1,0 +1,9 @@
+---
+ru:
+  web:
+    auth:
+      callback:
+        success: 'Успех: %{provider} аутентификация'
+        failure: 'Отказ: %{provider} аутентификация'
+      destroy:
+        success: 'Успех: вы вышли из системы'

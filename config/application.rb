@@ -9,7 +9,7 @@ require 'active_model/railtie'
 require 'active_record/railtie'
 require 'active_storage/engine'
 require 'action_controller/railtie'
-# require "action_mailer/railtie"
+require 'action_mailer/railtie'
 # require "action_mailbox/engine"
 require 'action_text/engine'
 require 'action_view/railtie'
@@ -33,5 +33,12 @@ module BulletinBoard
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = 'Moscow'
+
+    config.i18n.available_locales = %i[en ru]
+    config.i18n.default_locale = :ru
+
+    config.i18n.fallbacks = [:en]
   end
 end

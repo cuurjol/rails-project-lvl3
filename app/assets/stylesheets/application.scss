@@ -1,1 +1,26 @@
 @import "bootstrap";
+
+.collapse.bulletin-contact {
+  display: none !important;
+}
+
+.collapse.bulletin-contact.show {
+  display: flex !important;
+}
+
+.custom-card {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
+}
+
+.custom-form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 576px) {
+  .custom-form-actions {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}

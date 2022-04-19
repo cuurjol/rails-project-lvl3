@@ -1,0 +1,15 @@
+one:
+  name: one
+  email: one_email@example.com
+  password_digest: <%= default_password_digest %>
+
+two:
+  name: two
+  email: two_email@example.com
+  password_digest: <%= default_password_digest %>
+
+admin:
+  name: admin
+  email: admin_email@example.com
+  password_digest: <%= default_password_digest %>
+  admin: true

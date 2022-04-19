@@ -5,8 +5,11 @@
 
 import * as bootstrap from 'bootstrap'
 import "../stylesheets/application.scss"
+import "@fortawesome/fontawesome-free/css/all"
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 
 Rails.start()
 ActiveStorage.start()
+
+setTimeout(() => { document.getElementById('flashMessage').style.display = 'none'; }, 4000);

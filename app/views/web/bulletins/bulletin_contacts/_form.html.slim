@@ -1,0 +1,13 @@
+= simple_form_for(BulletinContact.new, url: bulletin_contacts_path(@bulletin)) do |f|
+  = invisible_captcha
+  = f.input(:bulletin_id, as: :hidden, input_html: { value: @bulletin.id })
+  = f.input(:owner_email, as: :hidden, input_html: { value: @bulletin.user.email })
+  = f.input(:name, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' })
+  = f.input(:email, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: true)
+  = f.input(:message, as: :text, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' },
+          input_html: { rows: 5 }, hint: t('.markdown_support'))
+  .d-flex.flex-column
+    = f.button(:submit, t('.submit'), class: 'btn-success my-2')
+    = button_tag(t('.cancel'), type: 'button', class: 'btn btn-secondary my-2',
+            data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletin-contact' },
+            aria: { expanded: 'false', controls: 'bulletin-contact' })

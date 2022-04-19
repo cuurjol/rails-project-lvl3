@@ -1,0 +1,18 @@
+.p-4.align-items-center.border.border-2.rounded-3.shadow.bg-white
+  .row.g-0
+    .p-2
+      h2 = t('.main_title')
+      hr
+      .my-4.p-3.bg-light.border.border-2.rounded-3
+        h5.mt-2 = t('.search_form_title')
+        = render('search_form')
+      .row
+        - @bulletins.each do |bulletin|
+          .pb-4.col-xl-3.col-lg-4.col-md-6.col-xs-12
+            .card.shadow-sm.h-100
+              = image_tag(bulletin.image, class: 'card-img-top', size: 250, style: 'object-fit: cover;')
+              .card-body
+                .d-flex.align-items-start.flex-column.h-100
+                  h5.card-title = bulletin.title
+                  h6.card-subtitle.mb-4.text-muted = bulletin.category.name
+                  = link_to(t('.bulletin_button'), bulletin_path(bulletin), class: 'btn btn-primary w-100 mt-auto')

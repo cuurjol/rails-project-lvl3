@@ -1,0 +1,9 @@
+---
+en:
+  web:
+    auth:
+      callback:
+        success: 'Success: %{provider} authentication'
+        failure: 'Failure: %{provider} authentication'
+      destroy:
+        success: 'Success: you are signed out'

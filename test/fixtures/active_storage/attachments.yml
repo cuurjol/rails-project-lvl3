@@ -1,0 +1,24 @@
+music_thumbnail_attachment:
+  name: image
+  record: music (Bulletin)
+  blob: music_thumbnail_blob
+
+clothes_thumbnail_attachment:
+  name: image
+  record: clothes (Bulletin)
+  blob: clothes_thumbnail_blob
+
+books_thumbnail_attachment:
+  name: image
+  record: books (Bulletin)
+  blob: books_thumbnail_blob
+
+vehicle_thumbnail_attachment:
+  name: image
+  record: vehicle (Bulletin)
+  blob: vehicle_thumbnail_blob
+
+furniture_thumbnail_attachment:
+  name: image
+  record: furniture (Bulletin)
+  blob: furniture_thumbnail_blob

@@ -1,0 +1,36 @@
+---
+ru:
+  web:
+    bulletins:
+      index:
+        main_title: Список объявлений
+        search_form_title: Форма поиска объявлений
+        bulletin_button: Открыть объявление
+      new:
+        main_title: Новое объявление
+      create:
+        success: Объявление было успешно создано
+      show:
+        edit_button: Редактировать
+        email_button: Написать владельцу
+        bulletins_button: Вернуться к объявлениям
+      edit:
+        main_title: Редактирование объявления
+      update:
+        success: Объявление было успешно обновлено
+      form:
+        submit: Сохранить
+        cancel_link: Отмена
+        markdown_support: Есть поддержка текста Markdown
+      search_form:
+        submit: Искать
+        clear_filter_link: Очистить
+        title_cont: Заголовок содержит
+        user_name_cont: Имя владельца содержит
+        category_id_eq: Категория равна
+      bulletin_contacts:
+        form:
+          submit: Отправить
+          cancel: Отмена
+          markdown_support: Есть поддержка текста Markdown
+

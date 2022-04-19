@@ -1,0 +1,24 @@
+---
+ru:
+  activerecord:
+    models:
+      user: Пользователь
+      category: Категория
+      bulletin: Объявление
+
+    attributes:
+      user:
+        name: Имя
+        email: Электронная почта
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+      category:
+        name: Название
+      bulletin:
+        title: Заголовок
+        description: Описание
+        user: Владелец
+        category: Категория
+        image: Изображение
+        created_at: Создано в
+        updated_at: Обновлено в

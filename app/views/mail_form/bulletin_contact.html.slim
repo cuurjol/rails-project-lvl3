@@ -1,0 +1,22 @@
+p = t('mail_form.bulletin_contact.main_text_html', website: link_to(URI(root_url).host, root_url))
+
+p = t('mail_form.bulletin_contact.info_letter_text')
+
+ol
+  li
+    b = "#{@resource.class.human_attribute_name(:name)}:"
+    =< @resource.name
+  li
+    b = "#{@resource.class.human_attribute_name(:email)}:"
+    =< @resource.email
+  li
+    b = "#{@resource.class.human_attribute_name(:bulletin_id)}:"
+    =< link_to(@resource.bulletin.title, bulletin_url(@resource.bulletin))
+
+p style='margin-bottom: 0rem;' = "#{@resource.class.human_attribute_name(:message)}:"
+
+hr
+
+==< @resource.markdown_message
+
+hr
