@@ -20,6 +20,7 @@ gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'aasm'
 gem 'active_storage_validations'
 gem 'invisible_captcha'
 gem 'mail_form'
