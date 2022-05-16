@@ -22,6 +22,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'aasm'
 gem 'active_storage_validations'
+gem 'faker'
 gem 'invisible_captcha'
 gem 'kaminari'
 gem 'mail_form'
@@ -42,7 +43,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
-  gem 'faker'
   gem 'letter_opener_web', '~> 2.0'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
