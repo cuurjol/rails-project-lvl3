@@ -1,14 +1,5 @@
 music:
   name: Music
 
-clothes:
-  name: Clothes
-
 books:
   name: Books
-
-vehicle:
-  name: Vehicle
-
-furniture:
-  name: Furniture

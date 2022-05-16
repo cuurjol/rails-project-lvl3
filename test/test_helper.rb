@@ -3,7 +3,8 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
-require 'support/test_password_helper'
+require 'policy_assertions'
+require 'helpers/test_password_helper'
 OmniAuth.config.test_mode = true
 
 module ActiveSupport
@@ -34,7 +35,7 @@ module ActionDispatch
       delete(sign_out_url)
     end
 
-    def signed_in?
+    def user_signed_in?
       session[:user_id].present? && current_user.present?
     end
 

@@ -10,14 +10,18 @@ ru:
         main_title: Новое объявление
       create:
         success: Объявление было успешно создано
-      show:
-        edit_button: Редактировать
-        email_button: Написать владельцу
-        bulletins_button: Вернуться к объявлениям
+        failure: Есть несколько ошибок при создании нового объявления
       edit:
         main_title: Редактирование объявления
       update:
         success: Объявление было успешно обновлено
+        failure: Есть несколько ошибок при обновлении существующего объявления
+      moderate:
+        success: Объявление было успешно отправлено на модерацию
+      archive:
+        success: Объявление было успешно отправлено в архив
+      draft:
+        success: Объявление было успешно отправлено в черновик
       form:
         submit: Сохранить
         cancel_link: Отмена
@@ -33,4 +37,54 @@ ru:
           submit: Отправить
           cancel: Отмена
           markdown_support: Есть поддержка текста Markdown
+      control_panel:
+        main_control_button: Управление объявлением
+        edit_link: Редактировать объявление
+        destroy_link: Удалить объявление
+        confirm_destruction: Подтвердить удаление
+        moderate_link: Отправить на модерацию
+        confirm_moderation: Подтвердить отправку на модерацию
+        publish_link: Опубликовать объявление
+        confirm_publication: Подтвердить публикацию
+        reject_link: Отклонить объявление
+        confirm_rejection: Подтвердить отклонение
+        archive_link: Архивировать объявление
+        confirm_archiving: Подтвердить архивирование
+        to_draft_link: Отправить в черновик
+        confirm_to_draft: Подтвердить отправку в черновик
+        bulletin_contact_button: Написать письмо владельцу
+        my_profile_link: Мои объявления
+        main_page_link: Главная страница
 
+    admin:
+      bulletins:
+        index:
+          main_title: Админка / Объявления
+          actions_table_column: Действия
+          actions:
+            show_bulletin: Показать
+            destroy_bulletin: Удалить
+            confirm_destruction: Подтвердить удаление
+            publish_bulletin: Опубликовать
+            confirm_publication: Подтвердить публикацию
+            reject_bulletin: Отклонить
+            confirm_rejection: Подтвердить отклонение
+            archive_bulletin: Архивировать
+            confirm_archiving: Подтвердить архивирование
+        destroy:
+          success: Объявление было успешно удалено
+        publish:
+          success: Объявление было успешно опубликовано
+        reject:
+          success: Объявление было успешно отклонено
+        archive:
+          success: Объявление было успешно отправлено в архив
+        search_form:
+          filters_title: Фильтры
+          submit: Искать
+          clear_filter_link: Очистить
+          attributes:
+            created_at_from: Создано (от)
+            created_at_to: Создано (до)
+            updated_at_from: Обновлено (от)
+            updated_at_to: Обновлено (до)

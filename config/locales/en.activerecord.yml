@@ -2,9 +2,18 @@
 en:
   activerecord:
     models:
-      user: User
-      category: Category
-      bulletin: Bulletin
+      user:
+        one: User
+        other: Users
+        zero: Users
+      category:
+        one: Category
+        other: Categories
+        zero: Categories
+      bulletin:
+        one: Bulletin
+        other: Bulletins
+        zero: Bulletins
 
     attributes:
       user:
@@ -17,6 +26,12 @@ en:
       bulletin:
         title: Title
         description: Description
+        state: State
+        state/draft: Draft
+        state/under_moderation: Moderation
+        state/published: Published
+        state/rejected: Rejected
+        state/archived: Archived
         user: Owner
         category: Category
         image: Image

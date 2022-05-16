@@ -1,0 +1,56 @@
+.container-xl.my-4
+  .p-4.align-items-center.border.border-2.rounded-3.shadow.bg-white
+    .row.g-0
+      .p-2
+        h2 = t('.main_title')
+        hr
+        .my-4.p-3.bg-light.border.border-2.rounded-3
+          h5.mt-2 = t('.search_form_title')
+          = render('search_form')
+        - if @bulletins.exists?
+          .table-responsive.border.border-2.rounded-3.border-dark.mb-2
+            table.table.table-bordered.table-sm.table-hover.border-dark.text-center.align-middle.mb-0
+              thead.table-dark.border-dark
+                tr
+                  th[scope='col'] #
+                  th[scope='col'] = Bulletin.human_attribute_name(:title)
+                  th[scope='col'] = Bulletin.human_attribute_name(:state)
+                  th[scope='col'] = Bulletin.human_attribute_name(:category)
+                  th[scope='col'] = t('.actions_table_column')
+              tbody.border-dark
+                - @bulletins.each.with_index(start_index(@bulletins)) do |bulletin, i|
+                  tr.text-wrap
+                    th[scope='row'] = i
+                    td.text-wrap = bulletin.title
+                    td = bulletin.aasm.human_state
+                    td = bulletin.category.name
+                    td
+                      .btn-group
+                        = link_to(t('.actions.show_bulletin'), bulletin_path(bulletin),
+                                class: 'btn btn-primary btn-sm')
+                        - if bulletin.may_archive?
+                          = button_tag('', type: :button, data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
+                                  class: 'btn btn-sm btn-secondary dropdown-toggle')
+                          ul.dropdown-menu.dropdown-menu-dark
+                            li = link_to(t('.actions.archive_bulletin'), archive_bulletin_path(bulletin),
+                                    method: :patch, class: 'dropdown-item',
+                                    data: { confirm: t('.actions.confirm_archiving') })
+                            - if bulletin.may_moderate?
+                              li = link_to(t('.actions.moderate_bulletin'), moderate_bulletin_path(bulletin),
+                                      method: :patch, class: 'dropdown-item',
+                                      data: { confirm: t('.actions.confirm_moderation') })
+                            - if bulletin.may_to_draft?
+                              li = link_to(t('.actions.to_draft_bulletin'), draft_bulletin_path(bulletin),
+                                      method: :patch, class: 'dropdown-item',
+                                      data: { confirm: t('.actions.confirm_to_draft') })
+              tfoot.table-dark.border-dark
+                tr
+                  td.border-bottom-0[colspan='5']
+                    .d-flex.justify-content-between
+                      = content_tag(:span, page_entries_info(@bulletins), class: 'me-2 text-nowrap')
+                      = paginate(@bulletins, window: 2, pagination_class: 'pagination-sm mb-0')
+
+        - else
+          = content_tag(:p, page_entries_info(@bulletins))
+
+        = link_to(t('.actions.create_bulletin'), new_bulletin_path, class: 'btn btn-primary')

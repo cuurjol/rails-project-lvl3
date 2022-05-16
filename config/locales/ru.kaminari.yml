@@ -1,0 +1,19 @@
+---
+ru:
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: Показано %{entry_name} %{first}&nbsp;-&nbsp;%{last} из %{total}
+      one_page:
+        display_entries:
+          few: Показаны %{count} %{entry_name}
+          many: Показаны %{count} %{entry_name}
+          one: Показано %{count} %{entry_name}
+          other: Показаны все %{count} %{entry_name}
+  views:
+    pagination:
+      first: Первая
+      last: Последняя
+      next: Следующая
+      previous: Предыдущая
+      truncate: ...

@@ -3,11 +3,11 @@
 class Bulletin < ApplicationRecord
   include AASM
 
-  aasm column: :state, whiny_transitions: false do
+  aasm column: :state do
     state :draft, initial: true
     state :under_moderation, :published, :rejected, :archived
 
-    event :send_to_moderate do
+    event :moderate do
       transitions from: %i[draft rejected], to: :under_moderation
     end
 
@@ -21,6 +21,10 @@ class Bulletin < ApplicationRecord
 
     event :archive do
       transitions from: %i[draft under_moderation published rejected], to: :archived
+    end
+
+    event :to_draft do
+      transitions from: :published, to: :draft
     end
   end
 

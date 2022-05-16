@@ -7,10 +7,27 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resource :session, only: %i[new create destroy]
+
+      resources :bulletins, only: %i[index show destroy] do
+        member do
+          patch :publish
+          patch :reject
+          patch :archive
+        end
+      end
+
+      resources :categories, except: :show
     end
 
-    resources :bulletins
+    resources :bulletins, except: :destroy do
+      member do
+        patch :moderate
+        patch :archive
+        patch :draft
+      end
+    end
 
+    get :profile, to: 'profiles#show'
     post '/bulletins/:bulletin_id/bulletin_contacts', to: 'bulletin_contacts#create', as: :bulletin_contacts
 
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth

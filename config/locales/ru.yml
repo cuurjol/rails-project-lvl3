@@ -1,15 +1,14 @@
 ---
 ru:
-  concerns:
-    authorization:
-      failure:
-        unauthenticated: Вам необходимо пройти аутентификацию, прежде чем продолжить это действие
   layouts:
     application:
       app_name: Доска объявлений
     shared:
       nav:
         brand: Доска объявлений
-        new_bulletin: Новое объявление
+        admin: Админка
+        bulletins: Объявления
+        categories: Категории
+        my_bulletins: Мои объявления
         sign_out: Выход
         authentication: Аутентификация

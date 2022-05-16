@@ -1,0 +1,23 @@
+---
+en:
+  web:
+    profiles:
+      show:
+        main_title: My bulletins
+        search_form_title: Bulletin search form
+        actions_table_column: Actions
+        actions:
+          create_bulletin: Create bulletin
+          show_bulletin: Show
+          moderate_bulletin: Moderate
+          confirm_moderation: Confirm sending for moderation
+          to_draft_bulletin: Draft
+          confirm_to_draft: Confirm sending to draft
+          archive_bulletin: Archive
+          confirm_archiving: Confirm archiving
+      search_form:
+        submit: Search
+        clear_filter_link: Clear
+        title_cont: Title contains
+        state_eq: State equals
+        category_id_eq: Category equals

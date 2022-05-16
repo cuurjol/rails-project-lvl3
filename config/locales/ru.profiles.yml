@@ -1,0 +1,23 @@
+---
+ru:
+  web:
+    profiles:
+      show:
+        main_title: Мои объявления
+        search_form_title: Форма поиска объявлений
+        actions_table_column: Действия
+        actions:
+          create_bulletin: Создать объявление
+          show_bulletin: Показать
+          moderate_bulletin: Модерировать
+          confirm_moderation: Подтвердить отправку на модерацию
+          to_draft_bulletin: Черновик
+          confirm_to_draft: Подтвердить отправку в черновик
+          archive_bulletin: Архивировать
+          confirm_archiving: Подтвердить архивирование
+      search_form:
+        submit: Искать
+        clear_filter_link: Очистить
+        title_cont: Заголовок содержит
+        state_eq: Состояние равно
+        category_id_eq: Категория равна

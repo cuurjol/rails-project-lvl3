@@ -1,19 +1,5 @@
-music_thumbnail_blob: <%= ActiveStorage::Blob.fixture(
-  filename: 'music.jpg'
-) %>
-
-clothes_thumbnail_blob: <%= ActiveStorage::Blob.fixture(
-  filename: 'clothes.jpg'
-) %>
-
-books_thumbnail_blob: <%= ActiveStorage::Blob.fixture(
-  filename: 'books.jpg'
-) %>
-
-vehicle_thumbnail_blob: <%= ActiveStorage::Blob.fixture(
-  filename: 'vehicle.jpg'
-) %>
-
-furniture_thumbnail_blob: <%= ActiveStorage::Blob.fixture(
-  filename: 'furniture.jpg'
-) %>
+<% %w[music books].each do |category| %>
+  <% Bulletin.aasm.states.map(&:name).each do |state| %>
+    <%= category %>_<%= state %>_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => "#{category}.jpg") %>
+  <% end %>
+<% end %>

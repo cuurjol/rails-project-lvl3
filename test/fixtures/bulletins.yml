@@ -1,29 +1,10 @@
-music:
-  title: Music test title
-  description: Music test description
-  user: one
-  category: music
-
-clothes:
-  title: Clothes test title
-  description: Clothes test description
-  user: one
-  category: clothes
-
-books:
-  title: Books test title
-  description: Books test description
-  user: two
-  category: books
-
-vehicle:
-  title: Vehicle test title
-  description: Vehicle test description
-  user: two
-  category: vehicle
-
-furniture:
-  title: Furniture test title
-  description: Furniture test description
-  user: two
-  category: vehicle
+<% { 'regular' => 'music', 'another_regular' => 'books' }.each do |user, category| %>
+  <% Bulletin.aasm.states.map(&:name).map(&:to_s).each do |state| %>
+    <%= category %>_<%= state %>:
+      title: <%= category.capitalize %> <%= state.split('_').map(&:capitalize).join(' ') %> Title
+      description: <%= category.capitalize %> <%= state.split('_').map(&:capitalize).join(' ') %> Description
+      state: <%= state.to_s %>
+      user: <%= user %>
+      category: <%= category %>
+  <% end %>
+<% end %>

@@ -1,0 +1,36 @@
+.container-md.my-4
+  h2.mb-4 = t('.main_title')
+  .row
+    .col-lg-3
+      = render('search_form')
+    .col-lg-9
+      - if @categories.exists?
+        .table-responsive.border.border-2.rounded-3.border-dark.mb-2
+          table.table.table-bordered.table-sm.table-hover.border-dark.text-center.align-middle.mb-0
+            thead.table-dark.border-dark
+              tr
+                th[scope='col'] #
+                th[scope='col'] = Bulletin.human_attribute_name(:name)
+                th.w-25[scope='col'] = t('.actions_table_column')
+              tbody.border-dark
+                - @categories.each.with_index(start_index(@categories)) do |category, i|
+                  tr
+                    th[scope='row'] = i
+                    td = category.name
+                    td
+                      .d-flex.justify-content-between
+                        = link_to(t('.actions.edit_category'), edit_admin_category_path(category),
+                                class: 'btn btn-sm btn-primary me-2')
+                        = link_to(t('.actions.destroy_category'), admin_category_path(category),
+                                method: :delete, class: 'btn btn-sm btn-danger ms-2',
+                                data: { confirm: t('.actions.confirm_destruction') })
+              tfoot.table-dark.border-dark
+                tr
+                  td.border-bottom-0[colspan='3']
+                    .d-flex.justify-content-between
+                      = content_tag(:span, page_entries_info(@categories), class: 'me-2 text-nowrap')
+                      = paginate(@categories, window: 2, pagination_class: 'pagination-sm mb-0')
+      - else
+        = content_tag(:p, page_entries_info(@categories))
+
+      = link_to(t('.actions.create_category'), new_admin_category_path, class: 'btn btn-primary')

@@ -1,0 +1,67 @@
+= search_form_for(@search, url: admin_bulletins_path, method: :get) do |f|
+  .card.text-dark.bg-light.mb-4
+    .card-header
+      h5.mt-2 = t('.filters_title')
+    .card-body
+      = f.input(filter_method_for(:title, :string), label: Bulletin.human_attribute_name(:title),
+              wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false) do
+        .row
+          .col-sm-6.col-lg-12.mb-2.mb-sm-0.mb-lg-2
+            = f.select(filter_method_for(:title, :string), predicate_choices_for(:title, :string),
+                    { include_blank: true }, { class: 'form-select', name: nil,
+                            data: { field: :title, type: :string } })
+          .col-sm-6.col-lg-12.mt-2.mt-sm-0.mt-lg-2
+            = f.text_field(filter_method_for(:title, :string), { class: 'form-control' })
+
+      = f.input(filter_method_for(:state, :integer), label: Bulletin.human_attribute_name(:state),
+              wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false) do
+        .row
+          .col-sm-6.col-lg-12.mb-2.mb-sm-0.mb-lg-2
+            = f.select(filter_method_for(:state, :integer), predicate_choices_for(:state, :integer),
+                    { include_blank: true }, { class: 'form-select', name: nil,
+                            data: { field: :state, type: :integer } })
+          .col-sm-6.col-lg-12.mt-2.mt-sm-0.mt-lg-2
+            = f.select(filter_method_for(:state, :integer),
+                    Bulletin.aasm.states.map { |state| [state.human_name, state.name] },
+                    { include_blank: true }, { class: 'form-select' })
+
+      = f.input(filter_method_for(:category_id, :integer), label: Bulletin.human_attribute_name(:category),
+              wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false) do
+        .row
+          .col-sm-6.col-lg-12.mb-2.mb-sm-0.mb-lg-2
+            = f.select(filter_method_for(:category_id, :integer), predicate_choices_for(:category_id, :integer),
+                    { include_blank: true }, { class: 'form-select', name: nil,
+                            data: { field: :category_id, type: :integer } })
+          .col-sm-6.col-lg-12.mt-2.mt-sm-0.mt-lg-2
+            = f.select(filter_method_for(:category_id, :integer), Category.pluck(:name, :id),
+                    { include_blank: true }, { class: 'form-select' })
+
+      = f.input(filter_method_for(:user_name, :string), label: Bulletin.human_attribute_name(:user),
+              wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false) do
+        .row
+          .col-sm-6.col-lg-12.mb-2.mb-sm-0.mb-lg-2
+            = f.select(filter_method_for(:user_name, :string), predicate_choices_for(:user_name, :string),
+                    { include_blank: true }, { class: 'form-select', name: nil,
+                            data: { field: :user_name, type: :string } })
+          .col-sm-6.col-lg-12.mt-2.mt-sm-0.mt-lg-2
+            = f.text_field(filter_method_for(:user_name, :string), { class: 'form-control' })
+
+      .row
+        .col-sm-6.col-lg-12
+          = f.input(:created_at_gteq, as: :datetime, html5: true, label: t('.attributes.created_at_from'),
+                  wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false)
+        .col-sm-6.col-lg-12
+          = f.input(:created_at_lteq, as: :datetime, html5: true, label: t('.attributes.created_at_to'),
+                  wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false)
+
+      .row
+        .col-sm-6.col-lg-12
+          = f.input(:updated_at_gteq, as: :datetime, html5: true, label: t('.attributes.updated_at_from'),
+                  wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false)
+        .col-sm-6.col-lg-12
+          = f.input(:updated_at_lteq, as: :datetime, html5: true, label: t('.attributes.updated_at_to'),
+                  wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false)
+    .card-footer
+      .custom-form-actions
+        = f.button(:submit, t('.submit'), class: 'btn-success mb-2 mb-sm-0')
+        = link_to(t('.clear_filter_link'), admin_bulletins_path, class: 'btn btn-danger mt-2 mt-sm-0')

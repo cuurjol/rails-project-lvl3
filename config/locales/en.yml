@@ -1,15 +1,14 @@
 ---
 en:
-  concerns:
-    authorization:
-      failure:
-        unauthenticated: You need to get authenticated before continuing with this action
   layouts:
     application:
       app_name: Bulletin board
     shared:
       nav:
         brand: Bulletin board
-        new_bulletin: New bulletin
+        admin: Admin
+        bulletins: Bulletins
+        categories: Categories
+        my_bulletins: My bulletins
         sign_out: Sign out
         authentication: Authentication

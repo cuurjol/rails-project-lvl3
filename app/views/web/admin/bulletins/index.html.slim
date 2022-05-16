@@ -1,0 +1,57 @@
+.container-xl.my-4
+  h2.mb-4 = t('.main_title')
+  .row
+    .col-lg-3
+      = render('search_form')
+    .col-lg-9
+      - if @bulletins.exists?
+        .table-responsive.border.border-2.rounded-3.border-dark.mb-2
+          table.table.table-bordered.table-sm.table-hover.border-dark.text-center.align-middle.mb-0
+            thead.table-dark.border-dark
+              tr
+                th[scope='col'] #
+                th[scope='col'] = Bulletin.human_attribute_name(:title)
+                th[scope='col'] = Bulletin.human_attribute_name(:state)
+                th[scope='col'] = Bulletin.human_attribute_name(:category)
+                th[scope='col'] = Bulletin.human_attribute_name(:user)
+                th[scope='col'] = Bulletin.human_attribute_name(:created_at)
+                th[scope='col'] = Bulletin.human_attribute_name(:updated_at)
+                th[scope='col'] = t('.actions_table_column')
+            tbody.border-dark
+              - @bulletins.each.with_index(start_index(@bulletins)) do |bulletin, i|
+                tr
+                  th[scope='row'] = i
+                  td = bulletin.title
+                  td = bulletin.aasm.human_state
+                  td = bulletin.category.name
+                  td = bulletin.user.name
+                  td = l(bulletin.created_at, format: :long)
+                  td = l(bulletin.updated_at, format: :long)
+                  td
+                    .btn-group
+                      = link_to(t('.actions.show_bulletin'), bulletin_path(bulletin), class: 'btn btn-primary btn-sm')
+                      = button_tag('', type: :button, data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
+                              class: 'btn btn-sm btn-secondary dropdown-toggle')
+                      ul.dropdown-menu.dropdown-menu-dark
+                        li = link_to(t('.actions.destroy_bulletin'), admin_bulletin_path(bulletin),
+                                method: :delete, class: 'dropdown-item',
+                                data: { confirm: t('.actions.confirm_destruction') })
+                        - if bulletin.may_archive?
+                          li = link_to(t('.actions.archive_bulletin'), archive_admin_bulletin_path(bulletin),
+                                  method: :patch, class: 'dropdown-item',
+                                  data: { confirm: t('.actions.confirm_archiving') })
+                        - if bulletin.under_moderation?
+                          li = link_to(t('.actions.publish_bulletin'), publish_admin_bulletin_path(bulletin),
+                                  method: :patch, class: 'dropdown-item',
+                                  data: { confirm: t('.actions.confirm_publication') })
+                          li = link_to(t('.actions.reject_bulletin'), reject_admin_bulletin_path(bulletin),
+                                  method: :patch, class: 'dropdown-item',
+                                  data: { confirm: t('.actions.confirm_rejection') })
+            tfoot.table-dark.border-dark
+              tr
+                td.border-bottom-0[colspan='8']
+                  .d-flex.justify-content-between
+                    = content_tag(:span, page_entries_info(@bulletins), class: 'me-2 text-nowrap')
+                    = paginate(@bulletins, window: 2, pagination_class: 'pagination-sm mb-0')
+      - else
+        = content_tag(:p, page_entries_info(@bulletins))

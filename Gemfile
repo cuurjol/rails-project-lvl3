@@ -23,10 +23,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'aasm'
 gem 'active_storage_validations'
 gem 'invisible_captcha'
+gem 'kaminari'
 gem 'mail_form'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'pundit'
 gem 'rails-i18n'
 gem 'ransack'
 gem 'redcarpet'
@@ -61,6 +63,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'minitest-power_assert'
+  gem 'policy-assertions'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'

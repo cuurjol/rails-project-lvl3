@@ -8,7 +8,7 @@ module Web
       def create
         user = User.authenticate(**admin_session_params.to_h.symbolize_keys)
 
-        if user.present?
+        if user.present? && user.admin?
           sign_in(user)
           redirect_to(root_path, notice: t('.success'))
         else

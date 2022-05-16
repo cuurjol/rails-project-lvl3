@@ -2,9 +2,18 @@
 ru:
   activerecord:
     models:
-      user: Пользователь
-      category: Категория
-      bulletin: Объявление
+      user:
+        one: Пользователь
+        few: Пользователя
+        many: Пользователей
+      category:
+        one: Категория
+        few: Категории
+        many: Категорий
+      bulletin:
+        one: Объявление
+        few: Объявления
+        many: Объявлений
 
     attributes:
       user:
@@ -17,8 +26,14 @@ ru:
       bulletin:
         title: Заголовок
         description: Описание
+        state: Состояние
+        state/draft: Черновик
+        state/under_moderation: Модерация
+        state/published: Опубликовано
+        state/rejected: Отклонено
+        state/archived: В архиве
         user: Владелец
         category: Категория
         image: Изображение
-        created_at: Создано в
-        updated_at: Обновлено в
+        created_at: Создано
+        updated_at: Обновлено

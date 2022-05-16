@@ -1,0 +1,32 @@
+---
+en:
+  web:
+    admin:
+      categories:
+        index:
+          main_title: Admin / Categories
+          actions_table_column: Actions
+          actions:
+            create_category: Create category
+            edit_category: Edit
+            destroy_category: Destroy
+            confirm_destruction: Confirm destruction
+        new:
+          main_title: New category
+        create:
+          success: Category was successfully created
+          failure: There are several errors when creating a new category
+        edit:
+          main_title: Editing category
+        update:
+          success: Category was successfully updated
+          failure: There are several errors when updating an existing category
+        destroy:
+          success: Category was successfully destroyed
+        form:
+          submit: Save
+          cancel_link: Cancel
+        search_form:
+          filters_title: Filters
+          submit: Search
+          clear_filter_link: Clear

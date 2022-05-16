@@ -1,49 +1,41 @@
-.p-4.align-items-center.border.border-2.rounded-3.shadow.bg-white
-  .row
-    .p-3.p-lg-5.pt-lg-0
-      .mb-4
-        h2 = @bulletin.title
-        hr
-
-      .custom-card
-        .row.g-0
-          .col-md-6.col-lg-4.p-3
-            = image_tag(@bulletin.image, class: 'img-fluid rounded-start')
-            .d-flex.flex-column.my-2.collapse.bulletin-contact.show
-              .py-2
-                - if signed_in? && @bulletin.user == current_user
-                  = link_to(t('.edit_button'), edit_bulletin_path(@bulletin), method: :get,
-                          class: 'btn btn-secondary w-100')
-                - else
-                  = button_tag(t('.email_button'), class: 'btn btn-secondary w-100', type: 'button',
-                          data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletin-contact' },
-                          aria: { expanded: 'false', controls: 'bulletin-contact' })
-              .py-2
-                = link_to(t('.bulletins_button'), bulletins_path, method: :get, class: 'btn btn-primary w-100')
-            .row.g-0.py-2.collapse.bulletin-contact
-              .col-12
-                h5.mt-2 = BulletinContact.model_name.human
-                = render(partial: 'web/bulletins/bulletin_contacts/form')
-
-          .col-md-6.col-lg-8.p-3
-            .text-start
-              .row
-                .col-md-6
-                  h5
-                    strong = "#{Bulletin.human_attribute_name(:user)}:"
-                    =< @bulletin.user.name
-                .col-md-6
-                  h5
-                    strong = "#{Bulletin.human_attribute_name(:created_at)}:"
-                    =< l(@bulletin.created_at, format: :long)
-              .row
-                .col-md-6
-                  h5
-                    strong = "#{Bulletin.human_attribute_name(:category)}:"
-                    =< @bulletin.category.name
-                .col-md-6
-                  h5
-                    strong = "#{Bulletin.human_attribute_name(:updated_at)}:"
-                    =< l(@bulletin.updated_at, format: :long)
-              hr
-              p == markdown(@bulletin.description)
+.container-lg.my-4
+  .p-4.align-items-center.border.border-2.rounded-3.shadow.bg-white
+    .row
+      .p-3.p-lg-5.pt-lg-0
+        .mb-4
+          h2 = @bulletin.title
+          hr
+        .custom-card
+          .row.g-0
+            .col-md-6.col-lg-4.p-3
+              = image_tag(@bulletin.image, class: 'img-fluid rounded-start')
+              = render(partial: 'web/bulletins/control_panel')
+              .row.g-0.py-2.collapse.bulletin-contact
+                .col-12
+                  h5.mt-2 = BulletinContact.model_name.human
+                  = render(partial: 'web/bulletins/bulletin_contacts/form')
+            .col-md-6.col-lg-8.p-3
+              .text-start
+                .row
+                  .col-md-6
+                    h5
+                      strong = "#{Bulletin.human_attribute_name(:user)}:"
+                      =< @bulletin.user.name
+                  .col-md-6
+                    h5
+                      strong = "#{Bulletin.human_attribute_name(:created_at)}:"
+                      =< l(@bulletin.created_at, format: :long)
+                  .col-md-6
+                    h5
+                      strong = "#{Bulletin.human_attribute_name(:category)}:"
+                      =< @bulletin.category.name
+                  .col-md-6
+                    h5
+                      strong = "#{Bulletin.human_attribute_name(:updated_at)}:"
+                      =< l(@bulletin.updated_at, format: :long)
+                  .col-md-6
+                    h5
+                      strong = "#{Bulletin.human_attribute_name(:state)}:"
+                      =< @bulletin.aasm.human_state
+                hr
+                p == markdown(@bulletin.description)

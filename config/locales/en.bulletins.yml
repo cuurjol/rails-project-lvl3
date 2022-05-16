@@ -10,14 +10,18 @@ en:
         main_title: New bulletin
       create:
         success: Bulletin was successfully created
-      show:
-        edit_button: Edit bulletin
-        email_button: Write to owner
-        bulletins_button: Back to bulletins
+        failure: There are several errors when creating a new bulletin
       edit:
         main_title: Editing bulletin
       update:
         success: Bulletin was successfully updated
+        failure: There are several errors when updating an existing bulletin
+      moderate:
+        success: Bulletin was successfully sent to moderate
+      archive:
+        success: Bulletin was successfully sent to archive
+      draft:
+        success: Bulletin was successfully sent to draft
       form:
         submit: Save
         cancel_link: Cancel
@@ -27,9 +31,60 @@ en:
         clear_filter_link: Clear
         title_cont: Title contains
         user_name_cont: Owner's name contains
-        category_id_eq: Category equal
+        category_id_eq: Category equals
       bulletin_contacts:
         form:
           submit: Send
           cancel: Cancel
           markdown_support: There is Markdown text support
+      control_panel:
+        main_control_button: Bulletin management
+        edit_link: Edit bulletin
+        destroy_link: Destroy bulletin
+        confirm_destruction: Confirm destruction
+        moderate_link: Send for moderation
+        confirm_moderation: Confirm sending for moderation
+        publish_link: Publish bulletin
+        confirm_publication: Confirm publication
+        reject_link: Reject bulletin
+        confirm_rejection: Confirm rejection
+        archive_link: Archive bulletin
+        confirm_archiving: Confirm archiving
+        to_draft_link: Send to draft
+        confirm_to_draft: Confirm sending to draft
+        bulletin_contact_button: Write an email to the owner
+        my_profile_link: My bulletins
+        main_page_link: Main page
+
+    admin:
+      bulletins:
+        index:
+          main_title: Admin / Bulletins
+          actions_table_column: Actions
+          actions:
+            show_bulletin: Show
+            destroy_bulletin: Destroy
+            confirm_destruction: Confirm destruction
+            publish_bulletin: Publish
+            confirm_publication: Confirm publication
+            reject_bulletin: Reject
+            confirm_rejection: Confirm rejection
+            archive_bulletin: Archive
+            confirm_archiving: Confirm archiving
+        destroy:
+          success: Bulletin was successfully destroyed
+        publish:
+          success: Bulletin was successfully published
+        reject:
+          success: Bulletin was successfully rejected
+        archive:
+          success: Bulletin was successfully sent to archive
+        search_form:
+          filters_title: Filters
+          submit: Search
+          clear_filter_link: Clear
+          attributes:
+            created_at_from: Created at (from)
+            created_at_to: Created at (to)
+            updated_at_from: Updated at (from)
+            updated_at_to: Updated at (to)

@@ -17,35 +17,37 @@ module Web
     end
 
     test 'should create and authenticate a new user via Github' do
-      auth_hash = { info: { email: Faker::Internet.email, name: Faker::Name.first_name },
-                    provider: 'github', uid: '12345' }
-
+      email = Faker::Internet.email
+      name = Faker::Name.first_name
+      auth_hash = { info: { email: email, name: name }, provider: 'github', uid: '12345' }
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
-      get(callback_auth_url(auth_hash[:provider]))
 
-      assert_response(:redirect)
-      assert_redirected_to(root_url)
-      assert { flash[:notice] == I18n.t('web.auth.callback.success', provider: auth_hash[:provider]) }
+      assert_difference(-> { User.count }) do
+        get(callback_auth_url(auth_hash[:provider]))
 
-      assert(User.exists?(email: auth_hash[:info][:email].downcase))
-      assert(signed_in?)
+        assert_response(:redirect)
+        assert_redirected_to(root_url)
+        assert { flash[:notice] == I18n.t('web.auth.callback.success', provider: auth_hash[:provider]) }
+        assert(user_signed_in?)
+      end
     end
 
     test 'should not create and authenticate a new user via Github' do
       auth_hash = { info: { email: '', name: '' }, provider: 'github', uid: '12345' }
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
-      get(callback_auth_url(auth_hash[:provider]))
 
-      assert_response(:redirect)
-      assert_redirected_to(root_url)
-      assert { flash[:alert] == I18n.t('web.auth.callback.failure', provider: auth_hash[:provider]) }
+      assert_no_difference(-> { User.count }) do
+        get(callback_auth_url(auth_hash[:provider]))
 
-      assert_not(User.exists?(email: auth_hash[:info][:email].downcase))
-      assert_not(signed_in?)
+        assert_response(:redirect)
+        assert_redirected_to(root_url)
+        assert { flash[:alert] == I18n.t('web.auth.callback.failure', provider: auth_hash[:provider]) }
+        assert_not(user_signed_in?)
+      end
     end
 
     test 'should destroy session for authorized user' do
-      sign_in(users(:one))
+      sign_in(users(:regular))
       delete(sign_out_url)
 
       assert_response(:redirect)

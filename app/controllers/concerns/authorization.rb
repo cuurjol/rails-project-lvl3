@@ -10,17 +10,13 @@ module Authorization
     session.clear
   end
 
-  def signed_in?
+  def user_signed_in?
     !!current_user
-  end
-
-  def authenticate_user!
-    return if signed_in?
-
-    redirect_to(root_path, alert: t('concerns.authorization.failure.unauthenticated'))
   end
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
+
+  delegate(:admin?, to: :current_user, prefix: :user, allow_nil: true)
 end

@@ -7,6 +7,9 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
 
+  scope :admin, -> { where(admin: true) }
+  scope :not_admin, -> { where.not(admin: true) }
+
   class << self
     def authenticate(email:, password:)
       User.find_by(email: email)&.authenticate(password)
