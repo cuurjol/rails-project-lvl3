@@ -13,18 +13,5 @@ en:
       moderate?: You don't have permissions to send this bulletin to moderate
       archive?: You don't have permissions to send this bulletin to archive
       draft?: You don't have permissions to send this bulletin to draft
-    admin/bulletin_policy:
-      index?: You don't have permissions to view a list of bulletins
-      destroy?: You don't have permissions to destroy an existing bulletin
-      publish?: You don't have permissions to publish this bulletin
-      reject?: You don't have permissions to reject this bulletin
-      archive?: You don't have permissions to send this bulletin to archive
-    admin/category_policy:
-      index?: You don't have permissions to view a list of categories
-      new?: You don't have permissions to create a new category
-      create?: You don't have permissions to create a new category
-      edit?: You don't have permissions to update an existing category
-      update?: You don't have permissions to update an existing category
-      destroy?: You don't have permissions to destroy an existing category
     profile/bulletin_policy:
       show?: You don't have permissions to view a profile page

@@ -17,11 +17,6 @@ module Web
         end
       end
 
-      def destroy
-        sign_out
-        redirect_to(root_path, notice: t('.success'))
-      end
-
       private
 
       def admin_session_params

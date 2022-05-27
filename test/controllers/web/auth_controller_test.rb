@@ -32,7 +32,7 @@ module Web
       end
     end
 
-    test 'should not create and authenticate a new user via Github' do
+    test 'should not create and authenticate a new user via Github due to validation errors' do
       auth_hash = { info: { email: '', name: '' }, provider: 'github', uid: '12345' }
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
 
@@ -46,13 +46,30 @@ module Web
       end
     end
 
-    test 'should destroy session for authorized user' do
+    test 'should destroy a session for authorized user' do
       sign_in(users(:regular))
       delete(sign_out_url)
 
       assert_response(:redirect)
       assert_redirected_to(root_url)
-      assert { flash[:notice] == I18n.t('web.auth.destroy.success') }
+      assert { flash[:notice] == I18n.t('web.auth.destroy.user_success') }
+    end
+
+    test 'should destroy a session for admin user' do
+      sign_in(users(:admin))
+      delete(sign_out_url)
+
+      assert_response(:redirect)
+      assert_redirected_to(root_url)
+      assert { flash[:notice] == I18n.t('web.auth.destroy.admin_success') }
+    end
+
+    test 'should not destroy an invalid session' do
+      delete(sign_out_url)
+
+      assert_response(:redirect)
+      assert_redirected_to(root_url)
+      assert { flash[:notice] == I18n.t('web.auth.destroy.failure') }
     end
   end
 end

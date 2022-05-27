@@ -18,10 +18,13 @@ en:
         failure: There are several errors when updating an existing bulletin
       moderate:
         success: Bulletin was successfully sent to moderate
+        failure: Failed to send the bulletin for moderation
       archive:
         success: Bulletin was successfully sent to archive
+        failure: Failed to archive the bulletin
       draft:
         success: Bulletin was successfully sent to draft
+        failure: Failed to send the bulletin to draft
       form:
         submit: Save
         cancel_link: Cancel
@@ -32,13 +35,13 @@ en:
         title_cont: Title contains
         user_name_cont: Owner's name contains
         category_id_eq: Category equals
-      bulletin_contacts:
-        form:
-          submit: Send
-          cancel: Cancel
-          markdown_support: There is Markdown text support
+      bulletin_contact_form:
+        submit: Send
+        cancel: Cancel
+        markdown_support: There is Markdown text support
       control_panel:
         main_control_button: Bulletin management
+        pages_control_button: Back to page
         edit_link: Edit bulletin
         destroy_link: Destroy bulletin
         confirm_destruction: Confirm destruction
@@ -53,6 +56,7 @@ en:
         to_draft_link: Send to draft
         confirm_to_draft: Confirm sending to draft
         bulletin_contact_button: Write an email to the owner
+        admin_bulletins_link: Admin / Bulletins
         my_profile_link: My bulletins
         main_page_link: Main page
 
@@ -75,10 +79,13 @@ en:
           success: Bulletin was successfully destroyed
         publish:
           success: Bulletin was successfully published
+          failure: Failed to publish the bulletin
         reject:
           success: Bulletin was successfully rejected
+          failure: Failed to reject the bulletin
         archive:
           success: Bulletin was successfully sent to archive
+          failure: Failed to archive the bulletin
         search_form:
           filters_title: Filters
           submit: Search

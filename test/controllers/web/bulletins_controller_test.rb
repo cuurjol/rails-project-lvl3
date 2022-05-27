@@ -12,18 +12,23 @@ module Web
     test 'should get a list of bulletins' do
       get(bulletins_url)
       assert_response(:success)
-      assert_select('h2', I18n.t('web.bulletins.index.main_title'))
     end
 
     test 'should get a creating form of bulletin' do
       get(new_bulletin_url)
       assert_response(:success)
-      assert_select('h2', I18n.t('web.bulletins.new.main_title'))
+    end
+
+    test 'failed pundit authorization to view a creating form of bulletin' do
+      assert_no_pundit_authorization(:bulletin_policy, :new?) do
+        sign_out
+        get(new_bulletin_url)
+      end
     end
 
     test 'should create a new bulletin' do
       params = { bulletin: { title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph,
-                             category_id: Category.find_by(name: 'Music').id,
+                             category_id: categories(:music).id,
                              image: fixture_file_upload('music.jpg', 'image/jpg') } }
 
       assert_difference(-> { Bulletin.count }) do
@@ -31,31 +36,57 @@ module Web
 
         assert_response(:redirect)
         assert_redirected_to(bulletin_url(Bulletin.last))
+        assert { Bulletin.exists?(title: params[:bulletin][:title], description: params[:bulletin][:description]) }
         assert { flash[:notice] == I18n.t('web.bulletins.create.success') }
       end
     end
 
-    test 'should not create a new bulletin' do
+    test 'should not create a new bulletin due to validation errors' do
       params = { bulletin: { title: '', description: '', category_id: '', image: nil } }
 
       assert_no_difference(-> { Bulletin.count }) do
         post(bulletins_url, params: params)
 
-        assert_response(:success)
+        assert_response(:unprocessable_entity)
         assert { flash[:alert] == I18n.t('web.bulletins.create.failure') }
+      end
+    end
+
+    test 'failed pundit authorization to create a new bulletin' do
+      assert_no_difference(-> { Bulletin.count }) do
+        assert_no_pundit_authorization(:bulletin_policy, :create?) do
+          params = { bulletin: { title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph,
+                                 category_id: categories(:music).id,
+                                 image: fixture_file_upload('music.jpg', 'image/jpg') } }
+
+          sign_out
+          post(bulletins_url, params: params)
+        end
       end
     end
 
     test 'should show a published bulletin' do
       get(bulletin_url(bulletins(:music_published)))
       assert_response(:success)
-      assert_select('h2', bulletins(:music_published).title)
+    end
+
+    test 'failed pundit authorization to view a draft bulletin' do
+      assert_no_pundit_authorization(:bulletin_policy, :show?) do
+        sign_out
+        get(bulletin_url(bulletins(:music_draft)))
+      end
     end
 
     test 'should get an editing form of bulletin' do
       get(edit_bulletin_url(bulletins(:music_draft)))
       assert_response(:success)
-      assert_select('h2', I18n.t('web.bulletins.edit.main_title'))
+    end
+
+    test 'failed pundit authorization to view an editing form of bulletin' do
+      assert_no_pundit_authorization(:bulletin_policy, :edit?) do
+        sign_out
+        get(edit_bulletin_url(bulletins(:music_draft)))
+      end
     end
 
     test 'should update an existing bulletin' do
@@ -74,15 +105,31 @@ module Web
       end
     end
 
-    test 'should not update an existing bulletin' do
+    test 'should not update an existing bulletin due to validation errors' do
       bulletin = bulletins(:music_draft)
 
       assert_no_changes(-> { bulletin.reload.title }) do
         assert_no_changes(-> { bulletin.reload.description }) do
           put(bulletin_url(bulletin), params: { bulletin: { title: '', description: '' } })
 
-          assert_response(:success)
+          assert_response(:unprocessable_entity)
           assert { flash[:alert] == I18n.t('web.bulletins.update.failure') }
+        end
+      end
+    end
+
+    test 'failed pundit authorization to update an existing bulletin' do
+      bulletin = bulletins(:music_draft)
+
+      assert_no_changes(-> { bulletin.reload.title }) do
+        assert_no_changes(-> { bulletin.reload.description }) do
+          assert_no_pundit_authorization(:bulletin_policy, :update?) do
+            title = Faker::Lorem.sentence
+            description = Faker::Lorem.paragraph
+
+            sign_out
+            put(bulletin_url(bulletin), params: { bulletin: { title: title, description: description } })
+          end
         end
       end
     end
@@ -97,13 +144,41 @@ module Web
       end
     end
 
-    test 'should send a rejected bulletin to archive' do
+    test 'should not send a published bulletin to moderate' do
+      assert_no_changes(-> { bulletins(:music_published).reload.state }) do
+        patch(moderate_bulletin_url(bulletins(:music_published)))
+
+        assert_response(:redirect)
+        assert_redirected_to(profile_url)
+        assert { flash[:alert] == I18n.t('web.bulletins.moderate.failure') }
+      end
+    end
+
+    test 'failed pundit authorization to send a published bulletin for moderation' do
+      assert_no_changes(-> { bulletins(:music_published).reload.state }) do
+        assert_no_pundit_authorization(:bulletin_policy, :moderate?) do
+          sign_out
+          patch(moderate_bulletin_url(bulletins(:music_published)))
+        end
+      end
+    end
+
+    test 'should archive a rejected bulletin' do
       assert_changes(-> { bulletins(:music_rejected).reload.state }, to: 'archived') do
         patch(archive_bulletin_url(bulletins(:music_rejected)))
 
         assert_response(:redirect)
         assert_redirected_to(profile_url)
         assert { flash[:notice] == I18n.t('web.bulletins.archive.success') }
+      end
+    end
+
+    test 'failed pundit authorization to archive a rejected bulletin' do
+      assert_no_changes(-> { bulletins(:music_rejected).reload.state }) do
+        assert_no_pundit_authorization(:bulletin_policy, :archive?) do
+          sign_out
+          patch(archive_bulletin_url(bulletins(:music_rejected)))
+        end
       end
     end
 
@@ -117,14 +192,22 @@ module Web
       end
     end
 
-    test 'should not send a published bulletin to draft for anonymous user' do
+    test 'should not send an archived bulletin to draft' do
       assert_no_changes(-> { bulletins(:music_archived).reload.state }) do
-        sign_out
-        patch(draft_bulletin_url(bulletins(:music_published)))
+        patch(draft_bulletin_url(bulletins(:music_archived)))
 
         assert_response(:redirect)
-        assert_redirected_to(root_url)
-        assert { flash[:alert] == I18n.t('pundit.bulletin_policy.draft?') }
+        assert_redirected_to(profile_url)
+        assert { flash[:alert] == I18n.t('web.bulletins.draft.failure') }
+      end
+    end
+
+    test 'failed pundit authorization to send an archived bulletin to draft' do
+      assert_no_changes(-> { bulletins(:music_archived).reload.state }) do
+        assert_no_pundit_authorization(:bulletin_policy, :draft?) do
+          sign_out
+          patch(draft_bulletin_url(bulletins(:music_archived)))
+        end
       end
     end
   end

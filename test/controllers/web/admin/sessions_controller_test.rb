@@ -33,15 +33,6 @@ module Web
         assert { flash[:alert] == I18n.t('web.admin.sessions.create.failure') }
         assert_not(user_signed_in?)
       end
-
-      test 'should destroy a session for an admin user' do
-        sign_in(@admin)
-        delete(admin_session_url)
-
-        assert_response(:redirect)
-        assert_redirected_to(root_url)
-        assert { flash[:notice] == I18n.t('web.admin.sessions.destroy.success') }
-      end
     end
   end
 end

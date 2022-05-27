@@ -18,10 +18,13 @@ ru:
         failure: Есть несколько ошибок при обновлении существующего объявления
       moderate:
         success: Объявление было успешно отправлено на модерацию
+        failure: Не удалось отправить объявление на модерацию
       archive:
         success: Объявление было успешно отправлено в архив
+        failure: Не удалось архивировать объявление
       draft:
         success: Объявление было успешно отправлено в черновик
+        failure: Не удалось отправить объявление в черновик
       form:
         submit: Сохранить
         cancel_link: Отмена
@@ -32,13 +35,13 @@ ru:
         title_cont: Заголовок содержит
         user_name_cont: Имя владельца содержит
         category_id_eq: Категория равна
-      bulletin_contacts:
-        form:
-          submit: Отправить
-          cancel: Отмена
-          markdown_support: Есть поддержка текста Markdown
+      bulletin_contact_form:
+        submit: Отправить
+        cancel: Отмена
+        markdown_support: Есть поддержка текста Markdown
       control_panel:
         main_control_button: Управление объявлением
+        pages_control_button: Вернуться на страницу
         edit_link: Редактировать объявление
         destroy_link: Удалить объявление
         confirm_destruction: Подтвердить удаление
@@ -53,6 +56,7 @@ ru:
         to_draft_link: Отправить в черновик
         confirm_to_draft: Подтвердить отправку в черновик
         bulletin_contact_button: Написать письмо владельцу
+        admin_bulletins_link: Админка / Объявления
         my_profile_link: Мои объявления
         main_page_link: Главная страница
 
@@ -75,10 +79,13 @@ ru:
           success: Объявление было успешно удалено
         publish:
           success: Объявление было успешно опубликовано
+          failure: Не удалось опубликовать объявление
         reject:
           success: Объявление было успешно отклонено
+          failure: Не удалось отколнить объявление
         archive:
           success: Объявление было успешно отправлено в архив
+          failure: Не удалось архивировать объявление
         search_form:
           filters_title: Фильтры
           submit: Искать

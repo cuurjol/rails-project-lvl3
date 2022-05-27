@@ -2,7 +2,7 @@
   h2.mb-4 = t('.main_title')
   .row
     .col-lg-3
-      = render('search_form')
+      = render(partial: 'search_form', locals: { search: @search })
     .col-lg-9
       - if @bulletins.exists?
         .table-responsive.border.border-2.rounded-3.border-dark.mb-2
@@ -40,10 +40,11 @@
                           li = link_to(t('.actions.archive_bulletin'), archive_admin_bulletin_path(bulletin),
                                   method: :patch, class: 'dropdown-item',
                                   data: { confirm: t('.actions.confirm_archiving') })
-                        - if bulletin.under_moderation?
+                        - if bulletin.may_publish?
                           li = link_to(t('.actions.publish_bulletin'), publish_admin_bulletin_path(bulletin),
                                   method: :patch, class: 'dropdown-item',
                                   data: { confirm: t('.actions.confirm_publication') })
+                        - if bulletin.may_reject?
                           li = link_to(t('.actions.reject_bulletin'), reject_admin_bulletin_path(bulletin),
                                   method: :patch, class: 'dropdown-item',
                                   data: { confirm: t('.actions.confirm_rejection') })

@@ -1,40 +1,62 @@
 .d-flex.flex-column.my-2.collapse.bulletin-contact.show
-  - if user_admin?
-    .py-2.text-wrap
-      = button_tag(t('.main_control_button'), data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
-              type: :button, class: 'btn btn-secondary w-100 dropdown-toggle text-wrap')
-      ul.dropdown-menu.dropdown-menu-dark
-        li = link_to(t('.destroy_link'), admin_bulletin_path(@bulletin), method: :delete,
-                class: 'dropdown-item', data: { confirm: t('.confirm_destruction') })
-        - if @bulletin.under_moderation?
-          li = link_to(t('.publish_link'), publish_admin_bulletin_path(@bulletin), method: :patch,
-                  class: 'dropdown-item', data: { confirm: t('.confirm_publication') })
-          li = link_to(t('.reject_link'), reject_admin_bulletin_path(@bulletin), method: :patch,
-                  class: 'dropdown-item', data: { confirm: t('.confirm_rejection') })
-        - if @bulletin.may_archive?
-          li = link_to(t('.archive_link'), archive_admin_bulletin_path(@bulletin), method: :patch,
-                  class: 'dropdown-item', data: { confirm: t('.confirm_archiving') })
-  - elsif user_signed_in? && @bulletin.user == current_user
-    - if @bulletin.may_archive?
-      .py-2
-        = button_tag(t('.main_control_button'), data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
-                type: :button, class: 'btn btn-secondary w-100 dropdown-toggle text-wrap')
-        ul.dropdown-menu.dropdown-menu-dark
-          - if @bulletin.may_moderate?
-            li = link_to(t('.edit_link'), edit_bulletin_path(@bulletin), class: 'dropdown-item')
-            li = link_to(t('.moderate_link'), moderate_bulletin_path(@bulletin), method: :patch,
-                    class: 'dropdown-item', data: { confirm: t('.confirm_moderation') })
-          - if @bulletin.may_to_draft?
-            li = link_to(t('.to_draft_link'), draft_bulletin_path(@bulletin), method: :patch,
-                    class: 'dropdown-item', data: { confirm: t('.confirm_to_draft') })
-          li = link_to(t('.archive_link'), archive_bulletin_path(@bulletin), method: :patch,
-                  class: 'dropdown-item', data: { confirm: t('.confirm_archiving') })
-    .py-2
-      = link_to(t('.my_profile_link'), profile_path, class: 'btn btn-success w-100')
-  - else
+  - if !user_signed_in? || bulletin.user != current_user && bulletin.published?
     .py-2
       = button_tag(t('.bulletin_contact_button'), class: 'btn btn-secondary w-100', type: 'button',
               data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletin-contact' },
               aria: { expanded: 'false', controls: 'bulletin-contact' })
-  .py-2
-    = link_to(t('.main_page_link'), bulletins_path, class: 'btn btn-primary w-100')
+  - if user_admin?
+    .py-2
+      = button_tag(t('.main_control_button'), data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
+              type: :button, class: 'btn btn-danger w-100 dropdown-toggle text-wrap')
+      ul.dropdown-menu.dropdown-menu-dark
+        - if bulletin.user == current_user
+          - if bulletin.may_moderate?
+            li = link_to(t('.edit_link'), edit_bulletin_path(bulletin), class: 'dropdown-item')
+            li = link_to(t('.moderate_link'), moderate_bulletin_path(bulletin), method: :patch,
+                    class: 'dropdown-item', data: { confirm: t('.confirm_moderation') })
+          - if bulletin.may_to_draft?
+            li = link_to(t('.to_draft_link'), draft_bulletin_path(bulletin), method: :patch,
+                    class: 'dropdown-item', data: { confirm: t('.confirm_to_draft') })
+        li = link_to(t('.destroy_link'), admin_bulletin_path(bulletin), method: :delete,
+                class: 'dropdown-item', data: { confirm: t('.confirm_destruction') })
+        - if bulletin.may_publish?
+          li = link_to(t('.publish_link'), publish_admin_bulletin_path(bulletin), method: :patch,
+                  class: 'dropdown-item', data: { confirm: t('.confirm_publication') })
+        - if bulletin.may_reject?
+          li = link_to(t('.reject_link'), reject_admin_bulletin_path(bulletin), method: :patch,
+                  class: 'dropdown-item', data: { confirm: t('.confirm_rejection') })
+        - if bulletin.may_archive?
+          li = link_to(t('.archive_link'), archive_admin_bulletin_path(bulletin), method: :patch,
+                  class: 'dropdown-item', data: { confirm: t('.confirm_archiving') })
+    .py-2
+      = button_tag(t('.pages_control_button'), data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
+              type: :button, class: 'btn btn-primary w-100 dropdown-toggle text-wrap')
+      ul.dropdown-menu.dropdown-menu-dark
+        li = link_to(t('.admin_bulletins_link'), admin_bulletins_path, class: 'dropdown-item')
+        - if bulletin.user == current_user
+          li = link_to(t('.my_profile_link'), profile_path, class: 'dropdown-item')
+        li = link_to(t('.main_page_link'), bulletins_path, class: 'dropdown-item')
+  - elsif user_signed_in? && bulletin.user == current_user
+    - if bulletin.may_archive?
+      .py-2
+        = button_tag(t('.main_control_button'), data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
+                type: :button, class: 'btn btn-danger w-100 dropdown-toggle text-wrap')
+        ul.dropdown-menu.dropdown-menu-dark
+          - if bulletin.may_moderate?
+            li = link_to(t('.edit_link'), edit_bulletin_path(bulletin), class: 'dropdown-item')
+            li = link_to(t('.moderate_link'), moderate_bulletin_path(bulletin), method: :patch,
+                    class: 'dropdown-item', data: { confirm: t('.confirm_moderation') })
+          - if bulletin.may_to_draft?
+            li = link_to(t('.to_draft_link'), draft_bulletin_path(bulletin), method: :patch,
+                    class: 'dropdown-item', data: { confirm: t('.confirm_to_draft') })
+          li = link_to(t('.archive_link'), archive_bulletin_path(bulletin), method: :patch,
+                  class: 'dropdown-item', data: { confirm: t('.confirm_archiving') })
+    .py-2
+      = button_tag('Вернуться на страницу', data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
+              type: :button, class: 'btn btn-primary w-100 dropdown-toggle text-wrap')
+      ul.dropdown-menu.dropdown-menu-dark
+        li = link_to(t('.my_profile_link'), profile_path, class: 'dropdown-item')
+        li = link_to(t('.main_page_link'), bulletins_path, class: 'dropdown-item')
+  - else
+    .py-2
+      = link_to(t('.main_page_link'), bulletins_path, class: 'btn btn-primary w-100')

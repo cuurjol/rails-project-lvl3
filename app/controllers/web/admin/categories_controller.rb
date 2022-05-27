@@ -3,9 +3,6 @@
 module Web
   module Admin
     class CategoriesController < ApplicationController
-      before_action :check_admin_authorize
-      before_action :set_category, only: %i[edit update destroy]
-
       def index
         @search = Category.ransack(params[:q])
         @categories = @search.result.page(params[:page])
@@ -22,35 +19,32 @@ module Web
           redirect_to(admin_categories_path, notice: t('.success'))
         else
           flash.now.alert = t('.failure')
-          render(:new)
+          render(:new, status: :unprocessable_entity)
         end
       end
 
-      def edit; end
+      def edit
+        @category = Category.find(params[:id])
+      end
 
       def update
+        @category = Category.find(params[:id])
+
         if @category.update(category_params)
           redirect_to(admin_categories_path, notice: t('.success'))
         else
           flash.now.alert = t('.failure')
-          render(:edit)
+          render(:edit, status: :unprocessable_entity)
         end
       end
 
       def destroy
+        @category = Category.find(params[:id])
         @category.destroy!
         redirect_to(admin_categories_path, notice: t('.success'))
       end
 
       private
-
-      def check_admin_authorize
-        authorize(Category)
-      end
-
-      def set_category
-        @category = Category.find(params[:id])
-      end
 
       def category_params
         params.require(:category).permit(:name)

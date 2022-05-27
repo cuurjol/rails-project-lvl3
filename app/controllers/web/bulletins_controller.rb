@@ -2,21 +2,23 @@
 
 module Web
   class BulletinsController < ApplicationController
-    before_action :set_bulletin, only: %i[show edit update moderate archive draft]
-
     def index
       @search = Bulletin.includes(:category, image_attachment: :blob).published.ransack(params[:q])
       @bulletins = @search.result.order(created_at: :desc).page(params[:page]).per(12)
     end
 
-    def show; end
+    def show
+      authorize(bulletin)
+    end
 
     def new
       authorize(Bulletin)
       @bulletin = Bulletin.new
     end
 
-    def edit; end
+    def edit
+      authorize(bulletin)
+    end
 
     def create
       authorize(Bulletin)
@@ -26,39 +28,43 @@ module Web
         redirect_to(@bulletin, notice: t('.success'))
       else
         flash.now.alert = t('.failure')
-        render(:new)
+        render(:new, status: :unprocessable_entity)
       end
     end
 
     def update
-      if @bulletin.update(bulletin_params)
-        redirect_to(@bulletin, notice: t('.success'))
+      authorize(bulletin)
+
+      if bulletin.update(bulletin_params)
+        redirect_to(bulletin, notice: t('.success'))
       else
         flash.now.alert = t('.failure')
-        render(:edit)
+        render(:edit, status: :unprocessable_entity)
       end
     end
 
     def moderate
-      @bulletin.moderate!
-      redirect_to(profile_path, notice: t('.success'))
+      authorize(bulletin)
+      flash_message = bulletin.moderate! ? { notice: t('.success') } : { alert: t('.failure') }
+      redirect_to(profile_path, flash_message)
     end
 
     def archive
-      @bulletin.archive!
-      redirect_to(profile_path, notice: t('.success'))
+      authorize(bulletin)
+      flash_message = bulletin.archive! ? { notice: t('.success') } : { alert: t('.failure') }
+      redirect_to(profile_path, flash_message)
     end
 
     def draft
-      @bulletin.to_draft!
-      redirect_to(profile_path, notice: t('.success'))
+      authorize(bulletin)
+      flash_message = bulletin.to_draft! ? { notice: t('.success') } : { alert: t('.failure') }
+      redirect_to(profile_path, flash_message)
     end
 
     private
 
-    def set_bulletin
-      @bulletin = Bulletin.find(params[:id])
-      authorize(@bulletin)
+    def bulletin
+      @bulletin ||= Bulletin.find(params[:id])
     end
 
     def bulletin_params

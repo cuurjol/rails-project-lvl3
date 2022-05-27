@@ -15,8 +15,18 @@ module Web
     end
 
     def destroy
-      sign_out
-      redirect_to(root_path, notice: t('.success'))
+      if session[:user_id].present?
+        flash_message = if User.find(session[:user_id]).admin?
+                          { notice: t('.admin_success') }
+                        else
+                          { notice: t('.user_success') }
+                        end
+
+        sign_out
+        redirect_to(root_path, flash_message)
+      else
+        redirect_to(root_path, notice: t('.failure'))
+      end
     end
   end
 end

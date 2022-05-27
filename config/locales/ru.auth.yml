@@ -6,4 +6,6 @@ ru:
         success: 'Успех: %{provider} аутентификация'
         failure: 'Отказ: %{provider} аутентификация'
       destroy:
-        success: 'Успех: вы вышли из системы'
+        admin_success: Вы успешно вышли из системы как администратор
+        user_success: 'Успех: вы вышли из системы'
+        failure: Invalid session

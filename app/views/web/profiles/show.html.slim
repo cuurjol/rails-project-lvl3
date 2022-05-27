@@ -6,7 +6,7 @@
         hr
         .my-4.p-3.bg-light.border.border-2.rounded-3
           h5.mt-2 = t('.search_form_title')
-          = render('search_form')
+          = render(partial: 'search_form', locals: { search: @search })
         - if @bulletins.exists?
           .table-responsive.border.border-2.rounded-3.border-dark.mb-2
             table.table.table-bordered.table-sm.table-hover.border-dark.text-center.align-middle.mb-0
@@ -32,10 +32,9 @@
                           = button_tag('', type: :button, data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
                                   class: 'btn btn-sm btn-secondary dropdown-toggle')
                           ul.dropdown-menu.dropdown-menu-dark
-                            li = link_to(t('.actions.archive_bulletin'), archive_bulletin_path(bulletin),
-                                    method: :patch, class: 'dropdown-item',
-                                    data: { confirm: t('.actions.confirm_archiving') })
                             - if bulletin.may_moderate?
+                              li = link_to(t('.actions.edit_bulletin'), edit_bulletin_path(bulletin),
+                                      class: 'dropdown-item')
                               li = link_to(t('.actions.moderate_bulletin'), moderate_bulletin_path(bulletin),
                                       method: :patch, class: 'dropdown-item',
                                       data: { confirm: t('.actions.confirm_moderation') })
@@ -43,6 +42,9 @@
                               li = link_to(t('.actions.to_draft_bulletin'), draft_bulletin_path(bulletin),
                                       method: :patch, class: 'dropdown-item',
                                       data: { confirm: t('.actions.confirm_to_draft') })
+                            li = link_to(t('.actions.archive_bulletin'), archive_bulletin_path(bulletin),
+                                    method: :patch, class: 'dropdown-item',
+                                    data: { confirm: t('.actions.confirm_archiving') })
               tfoot.table-dark.border-dark
                 tr
                   td.border-bottom-0[colspan='5']

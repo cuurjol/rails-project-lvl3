@@ -22,14 +22,14 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def moderate?
-    edit?
+    owner?
   end
 
   def archive?
-    owner? && record.may_archive?
+    moderate?
   end
 
   def draft?
-    owner? && record.may_to_draft?
+    moderate?
   end
 end

@@ -1,5 +1,10 @@
 ---
 ru:
+  web:
+    admin:
+      application:
+        user_admin:
+          failure: У вас недостаточно прав для выполнения этого действия
   layouts:
     application:
       app_name: Доска объявлений

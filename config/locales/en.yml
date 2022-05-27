@@ -1,5 +1,10 @@
 ---
 en:
+  web:
+    admin:
+      application:
+        user_admin:
+          failure: You don't have permissions to make this action
   layouts:
     application:
       app_name: Bulletin board

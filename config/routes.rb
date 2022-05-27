@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     root 'bulletins#index'
 
     namespace :admin do
-      resource :session, only: %i[new create destroy]
+      resource :session, only: %i[new create]
 
-      resources :bulletins, only: %i[index show destroy] do
+      resources :bulletins, only: %i[index destroy] do
         member do
           patch :publish
           patch :reject

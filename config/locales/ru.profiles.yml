@@ -9,6 +9,7 @@ ru:
         actions:
           create_bulletin: Создать объявление
           show_bulletin: Показать
+          edit_bulletin: Редактировать
           moderate_bulletin: Модерировать
           confirm_moderation: Подтвердить отправку на модерацию
           to_draft_bulletin: Черновик

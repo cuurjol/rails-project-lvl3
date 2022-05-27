@@ -2,7 +2,7 @@
   h2.mb-4 = t('.main_title')
   .row
     .col-lg-3
-      = render('search_form')
+      = render(partial: 'search_form', locals: { search: @search })
     .col-lg-9
       - if @categories.exists?
         .table-responsive.border.border-2.rounded-3.border-dark.mb-2

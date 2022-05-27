@@ -3,14 +3,14 @@
 module Web
   module Admin
     class ApplicationController < Web::ApplicationController
+      before_action :authorized_for_user_admin
+
       private
 
-      def policy_scope(scope)
-        super([:admin, scope])
-      end
+      def authorized_for_user_admin
+        return if user_admin?
 
-      def authorize(record, query = nil)
-        super([:admin, record], query)
+        redirect_to(root_path, alert: t('web.admin.application.user_admin.failure'))
       end
     end
   end

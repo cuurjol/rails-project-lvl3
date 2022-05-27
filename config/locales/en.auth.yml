@@ -6,4 +6,6 @@ en:
         success: 'Success: %{provider} authentication'
         failure: 'Failure: %{provider} authentication'
       destroy:
-        success: 'Success: you are signed out'
+        admin_success: You have successfully logged out as an admin
+        user_success: 'Success: you are signed out'
+        failure: Неверная сессия

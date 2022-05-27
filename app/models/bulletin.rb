@@ -3,7 +3,7 @@
 class Bulletin < ApplicationRecord
   include AASM
 
-  aasm column: :state do
+  aasm whiny_transitions: false, column: :state do
     state :draft, initial: true
     state :under_moderation, :published, :rejected, :archived
 

@@ -9,6 +9,7 @@ en:
         actions:
           create_bulletin: Create bulletin
           show_bulletin: Show
+          edit_bulletin: Edit
           moderate_bulletin: Moderate
           confirm_moderation: Confirm sending for moderation
           to_draft_bulletin: Draft

@@ -1,4 +1,4 @@
-= search_form_for(@search, url: profile_path, method: :get) do |f|
+= search_form_for(search, url: profile_path, method: :get) do |f|
   .row
     .col-lg-4
       = f.input(:title_cont, label: t('.title_cont'), wrapper_html: { class: 'my-2' },
