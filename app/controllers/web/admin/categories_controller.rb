@@ -24,13 +24,11 @@ module Web
       end
 
       def edit
-        @category = Category.find(params[:id])
+        category
       end
 
       def update
-        @category = Category.find(params[:id])
-
-        if @category.update(category_params)
+        if category.update(category_params)
           redirect_to(admin_categories_path, notice: t('.success'))
         else
           flash.now.alert = t('.failure')
@@ -39,12 +37,15 @@ module Web
       end
 
       def destroy
-        @category = Category.find(params[:id])
-        @category.destroy!
+        category.destroy!
         redirect_to(admin_categories_path, notice: t('.success'))
       end
 
       private
+
+      def category
+        @category ||= Category.find(params[:id])
+      end
 
       def category_params
         params.require(:category).permit(:name)
