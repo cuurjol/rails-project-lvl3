@@ -12,9 +12,18 @@ import * as ActiveStorage from "@rails/activestorage"
 Rails.start()
 ActiveStorage.start()
 
-window.addEventListener("load", () => {
-	let filters = document.querySelectorAll('select[data-field]');
-	filters.forEach((filter) => {
+// https://youmightnotneedjquery.com/
+// https://gist.github.com/joyrexus/7307312
+// https://webdesign.tutsplus.com/articles/essential-cheat-sheet-convert-jquery-to-javascript--cms-35633
+function closeFlashMessage() {
+	let flash_element = document.getElementById('flashMessage')
+	if (flash_element) {
+		setTimeout(() => { flash_element.style.display = 'none'; }, 4000);
+	}
+}
+
+function refreshSearchFilters() {
+	Array.prototype.forEach.call(document.querySelectorAll('select[data-field]'), function (filter) {
 		filter.addEventListener("change", (event) => {
 			let {field, type} = filter.dataset;
 
@@ -49,11 +58,31 @@ window.addEventListener("load", () => {
 			event.preventDefault();
 		});
 	});
-});
+}
+
+// https://stackoverflow.com/a/65614338
+// https://github.com/twbs/bootstrap/issues/11037
+function fixDropdownMenu() {
+	let dropdownMenu;
+
+	window.addEventListener('show.bs.dropdown', function (event) {
+		dropdownMenu = event.target.parentElement.querySelector('.dropdown-menu');
+		document.body.appendChild(dropdownMenu.parentElement.removeChild(dropdownMenu));
+
+		let eventOffset = event.target.getBoundingClientRect();
+		dropdownMenu.style.display = 'block';
+		dropdownMenu.style.top = `${eventOffset.top + event.target.offsetHeight}px`;
+		dropdownMenu.style.left = `${eventOffset.left}px`;
+	});
+
+	window.addEventListener('hide.bs.dropdown', function (event) {
+		event.target.appendChild(dropdownMenu.parentElement.removeChild(dropdownMenu));
+		dropdownMenu.style.display = 'none';
+	});
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-	let flash_element = document.getElementById('flashMessage')
-	if (flash_element) {
-		setTimeout(() => { flash_element.style.display = 'none'; }, 4000);
-	}
+	closeFlashMessage();
+	refreshSearchFilters();
+	fixDropdownMenu();
 });
