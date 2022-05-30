@@ -31,8 +31,8 @@
                     .btn-group
                       = link_to(t('.actions.show_bulletin'), bulletin_path(bulletin), class: 'btn btn-primary btn-sm')
                       = button_tag('', type: :button, data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
-                              class: 'btn btn-sm btn-secondary dropdown-toggle')
-                      ul.dropdown-menu.dropdown-menu-dark
+                              class: 'btn btn-sm btn-secondary dropdown-toggle', id: "dropdown-btn-#{i}")
+                      ul.dropdown-menu.dropdown-menu-dark id="dropdown-menu-#{i}"
                         li = link_to(t('.actions.destroy_bulletin'), admin_bulletin_path(bulletin),
                                 method: :delete, class: 'dropdown-item',
                                 data: { confirm: t('.actions.confirm_destruction') })

@@ -30,8 +30,8 @@
                                 class: 'btn btn-primary btn-sm')
                         - if bulletin.may_archive?
                           = button_tag('', type: :button, data: { 'bs-toggle': :dropdown, 'aria-expanded': false },
-                                  class: 'btn btn-sm btn-secondary dropdown-toggle')
-                          ul.dropdown-menu.dropdown-menu-dark
+                                  class: 'btn btn-sm btn-secondary dropdown-toggle', id: "dropdown-btn-#{i}")
+                          ul.dropdown-menu.dropdown-menu-dark id="dropdown-menu-#{i}"
                             - if bulletin.may_moderate?
                               li = link_to(t('.actions.edit_bulletin'), edit_bulletin_path(bulletin),
                                       class: 'dropdown-item')

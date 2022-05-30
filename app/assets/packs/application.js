@@ -3,6 +3,11 @@
 // a relevant structure within app/assets and only use these pack files to reference
 // that code so it'll be compiled.
 
+// Some useful links for JS:
+// https://youmightnotneedjquery.com/
+// https://gist.github.com/joyrexus/7307312
+// https://webdesign.tutsplus.com/articles/essential-cheat-sheet-convert-jquery-to-javascript--cms-35633
+
 import * as bootstrap from 'bootstrap'
 import "../stylesheets/application.scss"
 import "@fortawesome/fontawesome-free/css/all"
@@ -12,9 +17,6 @@ import * as ActiveStorage from "@rails/activestorage"
 Rails.start()
 ActiveStorage.start()
 
-// https://youmightnotneedjquery.com/
-// https://gist.github.com/joyrexus/7307312
-// https://webdesign.tutsplus.com/articles/essential-cheat-sheet-convert-jquery-to-javascript--cms-35633
 function closeFlashMessage() {
 	let flash_element = document.getElementById('flashMessage')
 	if (flash_element) {
@@ -62,27 +64,30 @@ function refreshSearchFilters() {
 
 // https://stackoverflow.com/a/65614338
 // https://github.com/twbs/bootstrap/issues/11037
-function fixDropdownMenu() {
-	let dropdownMenu;
+function fixTableDropdownsMenu() {
+	Array.prototype.forEach.call(document.querySelectorAll('.btn-group'), function (btn) {
+		btn.addEventListener('show.bs.dropdown', function (event) {
+			let dropdownBtnId = event.target.id;
+			let dropdownMenu = document.querySelector(`#dropdown-menu-${dropdownBtnId.replace('dropdown-btn-', '')}`);
+			let eventOffset = event.target.getBoundingClientRect();
 
-	window.addEventListener('show.bs.dropdown', function (event) {
-		dropdownMenu = event.target.parentElement.querySelector('.dropdown-menu');
-		document.body.appendChild(dropdownMenu.parentElement.removeChild(dropdownMenu));
+			document.body.appendChild(dropdownMenu.parentElement.removeChild(dropdownMenu));
+			dropdownMenu.style.display = 'block';
+			dropdownMenu.style.top = `${eventOffset.top + event.target.offsetHeight}px`;
+			dropdownMenu.style.left = `${eventOffset.left}px`;
+		});
 
-		let eventOffset = event.target.getBoundingClientRect();
-		dropdownMenu.style.display = 'block';
-		dropdownMenu.style.top = `${eventOffset.top + event.target.offsetHeight}px`;
-		dropdownMenu.style.left = `${eventOffset.left}px`;
-	});
-
-	window.addEventListener('hide.bs.dropdown', function (event) {
-		event.target.appendChild(dropdownMenu.parentElement.removeChild(dropdownMenu));
-		dropdownMenu.style.display = 'none';
+		btn.addEventListener('hide.bs.dropdown', function (event) {
+			let dropdownBtnId = event.target.id;
+			let dropdownMenu = document.querySelector(`#dropdown-menu-${dropdownBtnId.replace('dropdown-btn-', '')}`);
+			event.target.parentElement.appendChild(dropdownMenu.parentElement.removeChild(dropdownMenu));
+			dropdownMenu.style.display = 'none';
+		});
 	});
 }
 
 document.addEventListener('DOMContentLoaded', function() {
 	closeFlashMessage();
 	refreshSearchFilters();
-	fixDropdownMenu();
+	fixTableDropdownsMenu();
 });
