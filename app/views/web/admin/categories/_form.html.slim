@@ -2,4 +2,4 @@
   = f.input(:name, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' })
   .custom-form-actions
     = f.button(:submit, t('.submit'), class: 'btn-success my-2')
-    = link_to(t('.cancel_link'), :back, class: 'btn btn-secondary my-2')
+    = link_to(t('.cancel_link'), admin_categories_path, class: 'btn btn-secondary my-2')
