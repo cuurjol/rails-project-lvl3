@@ -1,5 +1,7 @@
 ---
 ru:
+  "true": Да
+  "false": Нет
   web:
     admin:
       application:
@@ -14,6 +16,7 @@ ru:
         admin: Админка
         bulletins: Объявления
         categories: Категории
+        users: Пользователи
         my_bulletins: Мои объявления
         sign_out: Выход
         authentication: Аутентификация

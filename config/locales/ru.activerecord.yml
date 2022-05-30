@@ -21,6 +21,7 @@ ru:
         email: Электронная почта
         password: Пароль
         password_confirmation: Подтверждение пароля
+        admin: Администратор
       category:
         name: Название
       bulletin:

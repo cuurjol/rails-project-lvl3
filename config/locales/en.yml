@@ -1,5 +1,7 @@
 ---
 en:
+  "true": "Yes"
+  "false": "No"
   web:
     admin:
       application:
@@ -14,6 +16,7 @@ en:
         admin: Admin
         bulletins: Bulletins
         categories: Categories
+        users: Users
         my_bulletins: My bulletins
         sign_out: Sign out
         authentication: Authentication

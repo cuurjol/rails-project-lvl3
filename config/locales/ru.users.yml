@@ -1,0 +1,27 @@
+---
+ru:
+  web:
+    admin:
+      users:
+        index:
+          main_title: Админка / Пользователи
+          actions_table_column: Действия
+          actions:
+            edit_user: Редактировать
+            destroy_user: Удалить
+            confirm_destruction: Подтвердить удаление
+        edit:
+          main_title: Редактирование пользователя
+        update:
+          success: Пользователь был успешно обновлён
+          failure: Есть несколько ошибок при обновлении существующего пользователя
+        destroy:
+          success: Пользователь был успешно удалён
+          failure: Вы не можете уничтожить себя из базы данных
+        form:
+          submit: Сохранить
+          cancel_link: Отмена
+        search_form:
+          filters_title: Фильтры
+          submit: Искать
+          clear_filter_link: Очистить

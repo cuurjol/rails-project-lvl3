@@ -1,0 +1,33 @@
+= search_form_for(search, url: admin_users_path, method: :get) do |f|
+  .card.text-dark.bg-light.mb-4
+    .card-header
+      h5.mt-2 = t('.filters_title')
+    .card-body
+      = f.input(filter_method_for(:name, :string), label: User.human_attribute_name(:name),
+              wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false) do
+        .row
+          .col-sm-6.col-lg-12.mb-2.mb-sm-0.mb-lg-2
+            = f.select(filter_method_for(:name, :string), predicate_choices_for(:name, :string),
+                    { include_blank: true }, { class: 'form-select', name: nil,
+                            data: { field: :name, type: :string } })
+          .col-sm-6.col-lg-12.mt-2.mt-sm-0.mt-lg-2
+            = f.text_field(filter_method_for(:name, :string), { class: 'form-control' })
+
+      = f.input(filter_method_for(:email, :string), label: User.human_attribute_name(:email),
+              wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false) do
+        .row
+          .col-sm-6.col-lg-12.mb-2.mb-sm-0.mb-lg-2
+            = f.select(filter_method_for(:email, :string), predicate_choices_for(:email, :string),
+                    { include_blank: true }, { class: 'form-select', name: nil,
+                            data: { field: :email, type: :string } })
+          .col-sm-6.col-lg-12.mt-2.mt-sm-0.mt-lg-2
+            = f.text_field(filter_method_for(:email, :string), { class: 'form-control' })
+
+      .row
+        .col-sm-6.col-lg-12
+          = f.input(:admin_eq, as: :boolean, label: User.human_attribute_name(:admin),
+                  wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' }, required: false)
+    .card-footer
+      .custom-form-actions
+        = f.button(:submit, t('.submit'), class: 'btn-success mb-2 mb-sm-0')
+        = link_to(t('.clear_filter_link'), admin_users_path, class: 'btn btn-danger mt-2 mt-sm-0')

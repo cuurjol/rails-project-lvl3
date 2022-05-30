@@ -1,0 +1,27 @@
+---
+en:
+  web:
+    admin:
+      users:
+        index:
+          main_title: Admin / Users
+          actions_table_column: Actions
+          actions:
+            edit_user: Edit
+            destroy_user: Destroy
+            confirm_destruction: Confirm destruction
+        edit:
+          main_title: Editing user
+        update:
+          success: User was successfully updated
+          failure: There are several errors when updating an existing user
+        destroy:
+          success: User was successfully destroyed
+          failure: You cannot destroy yourself from the database
+        form:
+          submit: Save
+          cancel_link: Cancel
+        search_form:
+          filters_title: Filters
+          submit: Search
+          clear_filter_link: Clear

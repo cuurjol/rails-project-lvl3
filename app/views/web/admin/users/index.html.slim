@@ -1,0 +1,38 @@
+.container-md.my-4
+  h2.mb-4 = t('.main_title')
+  .row
+    .col-lg-3
+      = render(partial: 'search_form', locals: { search: @search })
+    .col-lg-9
+      - if @users.exists?
+        .table-responsive.border.border-2.rounded-3.border-dark.mb-2
+          table.table.table-bordered.table-sm.table-hover.border-dark.text-center.align-middle.mb-0
+            thead.table-dark.border-dark
+              tr
+                th[scope='col'] #
+                th[scope='col'] = User.human_attribute_name(:name)
+                th[scope='col'] = User.human_attribute_name(:email)
+                th[scope='col'] = User.human_attribute_name(:admin)
+                th.w-25[scope='col'] = t('.actions_table_column')
+            tbody.border-dark
+              - @users.each.with_index(start_index(@users)) do |user, i|
+                tr
+                  th[scope='row'] = i
+                  td = user.name
+                  td = user.email
+                  td = t(user.admin.to_s)
+                  td
+                    .d-flex.justify-content-between
+                      = link_to(t('.actions.edit_user'), edit_admin_user_path(user),
+                              class: 'btn btn-sm btn-primary me-2')
+                      = link_to(t('.actions.destroy_user'), admin_user_path(user),
+                              method: :delete, class: 'btn btn-sm btn-danger ms-2',
+                              data: { confirm: t('.actions.confirm_destruction') })
+            tfoot.table-dark.border-dark
+              tr
+                td.border-bottom-0[colspan='5']
+                  .d-flex.justify-content-between
+                    = content_tag(:span, page_entries_info(@users), class: 'me-2 text-nowrap')
+                    = paginate(@users, window: 2, pagination_class: 'pagination-sm mb-0')
+      - else
+        = content_tag(:p, page_entries_info(@users))

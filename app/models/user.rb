@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(admin: true) }
   scope :not_admin, -> { where.not(admin: true) }
+  scope :all_except, ->(user) { where.not(id: user) }
 
   class << self
     def authenticate(email:, password:)

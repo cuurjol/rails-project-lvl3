@@ -19,6 +19,7 @@ nav.navbar.navbar-expand-md.navbar-dark.navbar-static-top.bg-dark
               ul.dropdown-menu.dropdown-menu-dark[aria-labelledby="adminDropdownMenuLink"]
                 li = link_to(t('.bulletins'), admin_bulletins_path, class: 'dropdown-item')
                 li = link_to(t('.categories'), admin_categories_path, class: 'dropdown-item')
+                li = link_to(t('.users'), admin_users_path, class: 'dropdown-item')
 
           li.nav-item.dropdown
             = link_to(current_user.email, '#', class: 'nav-link active dropdown-toggle', id: 'userDropdownMenuLink',

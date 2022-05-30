@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
 
       resources :categories, except: :show
+      resources :users, only: %i[index edit update destroy]
     end
 
     resources :bulletins, except: :destroy do
