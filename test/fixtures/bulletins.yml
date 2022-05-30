@@ -1,10 +1,69 @@
-<% { 'regular' => 'music', 'another_regular' => 'books' }.each do |user, category| %>
-  <% Bulletin.aasm.states.map(&:name).map(&:to_s).each do |state| %>
-    <%= category %>_<%= state %>:
-      title: <%= category.capitalize %> <%= state.split('_').map(&:capitalize).join(' ') %> Title
-      description: <%= category.capitalize %> <%= state.split('_').map(&:capitalize).join(' ') %> Description
-      state: <%= state.to_s %>
-      user: <%= user %>
-      category: <%= category %>
-  <% end %>
-<% end %>
+music_draft:
+  title: Music Draft Title
+  description: Music Draft Description
+  state: draft
+  user: regular
+  category: music
+
+music_under_moderation:
+  title: Music Under Moderation Title
+  description: Music Under Moderation Description
+  state: under_moderation
+  user: regular
+  category: music
+
+music_published:
+  title: Music Published Title
+  description: Music Published Description
+  state: published
+  user: regular
+  category: music
+
+music_rejected:
+  title: Music Rejected Title
+  description: Music Rejected Description
+  state: rejected
+  user: regular
+  category: music
+
+music_archived:
+  title: Music Archived Title
+  description: Music Archived Description
+  state: archived
+  user: regular
+  category: music
+
+books_draft:
+  title: Books Draft Title
+  description: Books Draft Description
+  state: draft
+  user: another_regular
+  category: books
+
+books_under_moderation:
+  title: Books Draft Title
+  description: Books Draft Description
+  state: under_moderation
+  user: another_regular
+  category: books
+
+books_published:
+  title: Books Draft Title
+  description: Books Draft Description
+  state: published
+  user: another_regular
+  category: books
+
+books_rejected:
+  title: Books Draft Title
+  description: Books Draft Description
+  state: rejected
+  user: another_regular
+  category: books
+
+books_archived:
+  title: Books Draft Title
+  description: Books Draft Description
+  state: archived
+  user: another_regular
+  category: books

@@ -1,8 +1,49 @@
-<% %w[music books].each do |category| %>
-  <% Bulletin.aasm.states.map(&:name).each do |state| %>
-    <%= category %>_<%= state %>_thumbnail_attachment:
-      name: image
-      record: <%= category %>_<%= state %> (Bulletin)
-      blob: <%= category %>_<%= state %>_thumbnail_blob
-  <% end %>
-<% end %>
+music_draft_thumbnail_attachment:
+  name: image
+  record: music_draft (Bulletin)
+  blob: music_draft_thumbnail_blob
+
+music_under_moderation_thumbnail_attachment:
+  name: image
+  record: music_under_moderation (Bulletin)
+  blob: music_under_moderation_thumbnail_blob
+
+music_published_thumbnail_attachment:
+  name: image
+  record: music_published (Bulletin)
+  blob: music_published_thumbnail_blob
+
+music_rejected_thumbnail_attachment:
+  name: image
+  record: music_rejected (Bulletin)
+  blob: music_rejected_thumbnail_blob
+
+music_archived_thumbnail_attachment:
+  name: image
+  record: music_archived (Bulletin)
+  blob: music_archived_thumbnail_blob
+
+books_draft_thumbnail_attachment:
+  name: image
+  record: books_draft (Bulletin)
+  blob: books_draft_thumbnail_blob
+
+books_under_moderation_thumbnail_attachment:
+  name: image
+  record: books_under_moderation (Bulletin)
+  blob: books_under_moderation_thumbnail_blob
+
+books_published_thumbnail_attachment:
+  name: image
+  record: books_published (Bulletin)
+  blob: books_published_thumbnail_blob
+
+books_rejected_thumbnail_attachment:
+  name: image
+  record: books_rejected (Bulletin)
+  blob: books_rejected_thumbnail_blob
+
+books_archived_thumbnail_attachment:
+  name: image
+  record: books_archived (Bulletin)
+  blob: books_archived_thumbnail_blob

@@ -1,5 +1,11 @@
-<% %w[music books].each do |category| %>
-  <% Bulletin.aasm.states.map(&:name).each do |state| %>
-    <%= category %>_<%= state %>_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => "#{category}.jpg") %>
-  <% end %>
-<% end %>
+music_draft_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'music.jpg') %>
+music_under_moderation_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'music.jpg') %>
+music_published_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'music.jpg') %>
+music_rejected_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'music.jpg') %>
+music_archived_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'music.jpg') %>
+
+books_draft_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'books.jpg') %>
+books_under_moderation_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'books.jpg') %>
+books_published_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'books.jpg') %>
+books_rejected_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'books.jpg') %>
+books_archived_thumbnail_blob: <%= ActiveStorage::Blob.fixture('filename'.to_sym => 'books.jpg') %>
