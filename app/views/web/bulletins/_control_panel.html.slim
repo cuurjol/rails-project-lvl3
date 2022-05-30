@@ -1,5 +1,5 @@
 .d-flex.flex-column.my-2.collapse.bulletin-contact.show
-  - if !user_signed_in? || bulletin.user != current_user && bulletin.published?
+  - if !user_signed_in? || (bulletin.user != current_user && bulletin.published?)
     .py-2
       = button_tag(t('.bulletin_contact_button'), class: 'btn btn-secondary w-100', type: 'button',
               data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletin-contact' },
