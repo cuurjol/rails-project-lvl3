@@ -8,8 +8,8 @@ unless Category.exists?
 end
 
 unless User.admin.exists?
-  params = { name: 'Admin User', email: 'admin_user_email@example.com', password: '[admin_user_password]',
-             password_confirmation: '[admin_user_password]', admin: true }
+  params = { name: 'Admin User', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'],
+             password_confirmation: ENV['ADMIN_PASSWORD'], admin: true }
   User.create!(params)
 end
 
