@@ -4,6 +4,7 @@ require 'test_helper'
 
 module Web
   module Admin
+    # rubocop:disable Metrics/ClassLength
     class CategoriesControllerTest < ActionDispatch::IntegrationTest
       setup do
         @admin = users(:admin)
@@ -132,5 +133,6 @@ module Web
         end
       end
     end
+    # rubocop:enable Metrics/ClassLength
   end
 end

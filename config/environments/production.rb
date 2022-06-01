@@ -99,11 +99,11 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: ENV['APP_PRODUCTION_HOST'] }
+  config.action_mailer.default_url_options = { host: ENV.fetch('APP_PRODUCTION_HOST', nil) }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: ENV['GOOGLE_SMTP_USER_NAME'],
-    password: ENV['GOOGLE_SMTP_PASSWORD'],
+    user_name: ENV.fetch('GOOGLE_SMTP_USER_NAME', nil),
+    password: ENV.fetch('GOOGLE_SMTP_PASSWORD', nil),
     address: 'smtp.gmail.com',
     port: 587,
     authentication: :plain,

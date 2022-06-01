@@ -10,10 +10,6 @@ Layout/LineLength:
   Exclude:
     - config/initializers/devise.rb
 
-Metrics/ClassLength:
-  Exclude:
-    - test/controllers/**/*.rb
-
 Metrics/BlockLength:
   Exclude:
     - config/initializers/simple_form_bootstrap.rb

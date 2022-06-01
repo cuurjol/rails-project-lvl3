@@ -3,6 +3,7 @@
 require 'test_helper'
 
 module Web
+  # rubocop:disable Metrics/ClassLength
   class BulletinsControllerTest < ActionDispatch::IntegrationTest
     setup do
       @user = users(:regular)
@@ -211,4 +212,5 @@ module Web
       end
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

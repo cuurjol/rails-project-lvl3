@@ -8,8 +8,8 @@ unless Category.exists?
 end
 
 unless User.admin.exists?
-  params = { name: 'Admin User', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'],
-             password_confirmation: ENV['ADMIN_PASSWORD'], admin: true }
+  params = { name: 'Admin User', email: ENV.fetch('ADMIN_EMAIL', nil), password: ENV.fetch('ADMIN_PASSWORD', nil),
+             password_confirmation: ENV.fetch('ADMIN_PASSWORD', nil), admin: true }
   User.create!(params)
 end
 
