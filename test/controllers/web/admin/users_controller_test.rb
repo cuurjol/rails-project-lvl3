@@ -16,7 +16,7 @@ module Web
       end
 
       test 'failed admin authorization to view a list of users' do
-        assert_no_admin_authorization do
+        assert_no_authorization do
           sign_out
           get(admin_users_url)
         end
@@ -28,7 +28,7 @@ module Web
       end
 
       test 'failed admin authorization to view an editing form of user' do
-        assert_no_admin_authorization do
+        assert_no_authorization do
           sign_out
           get(edit_admin_user_url(users(:regular)))
         end
@@ -43,10 +43,7 @@ module Web
         assert_changes(-> { user.reload.name }, to: name) do
           assert_changes(-> { user.reload.email }, to: email) do
             put(admin_user_url(user), params: { user: { name: name, email: email } })
-
-            assert_response(:redirect)
             assert_redirected_to(admin_users_url)
-            assert { flash[:notice] == I18n.t('web.admin.users.update.success') }
           end
         end
       end
@@ -57,9 +54,7 @@ module Web
         assert_no_changes(-> { user.reload.name }) do
           assert_no_changes(-> { user.reload.email }) do
             put(admin_user_url(user), params: { user: { name: '', email: '' } })
-
             assert_response(:unprocessable_entity)
-            assert { flash[:alert] == I18n.t('web.admin.users.update.failure') }
           end
         end
       end
@@ -72,7 +67,7 @@ module Web
 
         assert_no_changes(-> { user.reload.name }) do
           assert_no_changes(-> { user.reload.email }) do
-            assert_no_admin_authorization do
+            assert_no_authorization do
               sign_out
               put(admin_user_url(user), params: { user: { name: name, email: email } })
             end
@@ -83,28 +78,22 @@ module Web
       test 'should destroy an existing user' do
         assert_difference(-> { User.count }, -1) do
           delete(admin_user_url(users(:regular)))
-
-          assert_response(:redirect)
           assert_redirected_to(admin_users_url)
           assert { !User.exists?(name: users(:regular).name) }
-          assert { flash[:notice] == I18n.t('web.admin.users.destroy.success') }
         end
       end
 
       test 'should not destroy an admin existing user (himself)' do
         assert_no_difference(-> { User.count }) do
           delete(admin_user_url(users(:admin)))
-
-          assert_response(:redirect)
           assert_redirected_to(admin_users_url)
           assert { User.exists?(name: users(:admin).name) }
-          assert { flash[:alert] == I18n.t('web.admin.users.destroy.failure') }
         end
       end
 
       test 'failed admin authorization to destroy an existing user' do
         assert_no_difference(-> { User.count }) do
-          assert_no_admin_authorization do
+          assert_no_authorization do
             sign_out
             delete(admin_user_url(users(:regular)))
           end

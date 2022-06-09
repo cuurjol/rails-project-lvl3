@@ -16,7 +16,7 @@ module Web
     end
 
     test 'failed pundit authorization to view a profile page' do
-      assert_no_pundit_authorization(:'profile/bulletin_policy', :show?) do
+      assert_no_authorization do
         sign_out
         get(profile_url)
       end
