@@ -2,8 +2,8 @@
   - if !user_signed_in? || (bulletin.user != current_user && bulletin.published?)
     .py-2
       = button_tag(t('.bulletin_contact_button'), class: 'btn btn-secondary w-100', type: 'button',
-              data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletin-contact' },
-              aria: { expanded: 'false', controls: 'bulletin-contact' })
+              data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletins-contact' },
+              aria: { expanded: 'false', controls: 'bulletins-contact' })
   - if user_admin?
     .py-2
       = button_tag(t('.main_control_button'), data: { 'bs-toggle': :dropdown, 'aria-expanded': false },

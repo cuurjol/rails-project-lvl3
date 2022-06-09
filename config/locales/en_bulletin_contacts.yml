@@ -1,7 +1,0 @@
----
-en:
-  web:
-    bulletin_contacts:
-      create:
-        success: Letter has been sent
-        failure: Could not send letter

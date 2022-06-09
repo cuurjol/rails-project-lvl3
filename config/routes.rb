@@ -16,11 +16,15 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :categories, except: :show
+      resources :categories, only: %i[index new create edit update destroy]
       resources :users, only: %i[index edit update destroy]
     end
 
-    resources :bulletins, except: :destroy do
+    resources :bulletins, only: %i[index show new create edit update] do
+      scope module: :bulletins do
+        resources :contacts, only: :create
+      end
+
       member do
         patch :moderate
         patch :archive
@@ -28,8 +32,7 @@ Rails.application.routes.draw do
       end
     end
 
-    get :profile, to: 'profiles#show'
-    post '/bulletins/:bulletin_id/bulletin_contacts', to: 'bulletin_contacts#create', as: :bulletin_contacts
+    resource :profile, only: :show
 
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     post 'auth/:provider', to: 'auth#request', as: :auth_request

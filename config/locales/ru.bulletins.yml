@@ -35,7 +35,7 @@ ru:
         title_cont: Заголовок содержит
         user_name_cont: Имя владельца содержит
         category_id_eq: Категория равна
-      bulletin_contact_form:
+      bulletins_contact_form:
         submit: Отправить
         cancel: Отмена
         markdown_support: Есть поддержка текста Markdown
@@ -59,6 +59,10 @@ ru:
         admin_bulletins_link: Админка / Объявления
         my_profile_link: Мои объявления
         main_page_link: Главная страница
+      contacts:
+        create:
+          success: Письмо было отправлено
+          failure: Не удалось отправить письмо
 
     admin:
       bulletins:

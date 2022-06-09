@@ -2,7 +2,7 @@
 en:
   pundit:
     default: You are not authorized to perform this action
-    bulletin_contact_policy:
+    bulletins/contact_policy:
       create?: You don't have permissions to send an email
     bulletin_policy:
       new?: You don't have permissions to create a new bulletin

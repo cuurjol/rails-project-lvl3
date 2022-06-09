@@ -35,7 +35,7 @@ en:
         title_cont: Title contains
         user_name_cont: Owner's name contains
         category_id_eq: Category equals
-      bulletin_contact_form:
+      bulletins_contact_form:
         submit: Send
         cancel: Cancel
         markdown_support: There is Markdown text support
@@ -59,6 +59,10 @@ en:
         admin_bulletins_link: Admin / Bulletins
         my_profile_link: My bulletins
         main_page_link: Main page
+      contacts:
+        create:
+          success: Letter has been sent
+          failure: Could not send letter
 
     admin:
       bulletins:

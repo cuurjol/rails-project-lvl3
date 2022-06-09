@@ -1,7 +1,0 @@
----
-ru:
-  web:
-    bulletin_contacts:
-      create:
-        success: Письмо было отправлено
-        failure: Не удалось отправить письмо

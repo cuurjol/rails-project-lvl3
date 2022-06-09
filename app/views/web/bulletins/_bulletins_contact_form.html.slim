@@ -1,4 +1,4 @@
-= simple_form_for(BulletinContact.new, url: bulletin_contacts_path(bulletin)) do |f|
+= simple_form_for(Bulletins::Contact.new, url: bulletin_contacts_path(bulletin)) do |f|
   = invisible_captcha
   = f.input(:bulletin_id, as: :hidden, input_html: { value: bulletin.id })
   = f.input(:name, wrapper_html: { class: 'my-2' }, label_html: { class: 'fst-italic' })
@@ -8,5 +8,5 @@
   .d-flex.flex-column
     = f.button(:submit, t('.submit'), class: 'btn-success my-2')
     = button_tag(t('.cancel'), type: 'button', class: 'btn btn-secondary my-2',
-            data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletin-contact' },
-            aria: { expanded: 'false', controls: 'bulletin-contact' })
+            data: { 'bs-toggle' => 'collapse', 'bs-target' => '.bulletins-contact' },
+            aria: { expanded: 'false', controls: 'bulletins-contact' })

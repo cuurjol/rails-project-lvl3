@@ -2,7 +2,7 @@
 ru:
   pundit:
     default: Вы не авторизованы для выполнения этого действия
-    bulletin_contact_policy:
+    bulletins/contact_policy:
       create?: У вас недостаточно прав для отправки письма по электронной почте
     bulletin_policy:
       new?: У вас недостаточно прав для создания нового объявления

@@ -2,17 +2,18 @@
 en:
   mail_form:
     models:
-      bulletin_contact: Contact form for bulletin
-    bulletin_contact:
-      subject: New letter for your bulletin
-      main_text_html: >-
-        You received this email because you created a bulletin on the website %{website}
-        and someone responded to your bulletin.
-      info_letter_text: >-
-        Information about the letter:
+      bulletins/contact: Contact form for bulletin
     attributes:
-      bulletin_contact:
+      bulletins/contact:
         name: Sender's name
         email: Email
         message: Message
         bulletin_id: Bulletin link
+    bulletins:
+      contact:
+        subject: New letter for your bulletins
+        main_text_html: >-
+          You received this email because you created a bulletin on the website %{website}
+          and someone responded to your bulletin.
+        info_letter_text: >-
+          Information about the letter:

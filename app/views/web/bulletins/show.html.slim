@@ -12,8 +12,8 @@
               = render(partial: 'control_panel', locals: { bulletin: @bulletin })
               .row.g-0.py-2.collapse.bulletin-contact
                 .col-12
-                  h5.mt-2 = BulletinContact.model_name.human
-                  = render(partial: 'bulletin_contact_form', locals: { bulletin: @bulletin })
+                  h5.mt-2 = Bulletins::Contact.model_name.human
+                  = render(partial: 'bulletins_contact_form', locals: { bulletin: @bulletin })
             .col-md-6.col-lg-8.p-3
               .text-start
                 .row
