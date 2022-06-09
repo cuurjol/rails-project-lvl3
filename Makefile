@@ -1,6 +1,7 @@
 install:
 	bundle install
 	yarn install
+	bundle exec rails db:prepare
 
 db-drop:
 	bundle exec rails db:drop

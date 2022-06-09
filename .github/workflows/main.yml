@@ -33,8 +33,5 @@ jobs:
       - name: Run linters
         run: make linters
 
-      - name: Run migrations
-        run: make db-migrate
-
       - name: Run tests
         run: make test
