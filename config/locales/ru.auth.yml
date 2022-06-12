@@ -8,4 +8,4 @@ ru:
       destroy:
         admin_success: Вы успешно вышли из системы как администратор
         user_success: 'Успех: вы вышли из системы'
-        failure: Invalid session
+        failure: Неверная сессия

@@ -20,7 +20,7 @@
                   th[scope='row'] = i
                   td = user.name
                   td = user.email
-                  td = t(user.admin.to_s)
+                  td = t(user.admin)
                   td
                     .d-flex.justify-content-between
                       = link_to(t('.actions.edit_user'), edit_admin_user_path(user),

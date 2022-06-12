@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def start_index(collection)
-    (collection.limit_value * collection.current_page) - collection.limit_value + 1
+    (collection.limit_value * (collection.current_page - 1)) + 1
   end
 
   def filter_method_for(attribute, type)

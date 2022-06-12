@@ -25,7 +25,7 @@ module Web
         sign_out
         redirect_to(root_path, flash_message)
       else
-        redirect_to(root_path, notice: t('.failure'))
+        redirect_to(root_path, alert: t('.failure'))
       end
     end
   end
