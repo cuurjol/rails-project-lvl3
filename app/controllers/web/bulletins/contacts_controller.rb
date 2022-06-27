@@ -19,7 +19,7 @@ module Web
       private
 
       def contact_params
-        params.require(:contact).permit(:name, :email, :message, :bulletin_id)
+        params.require(:bulletins_contact).permit(:name, :email, :message, :bulletin_id)
       end
     end
   end
