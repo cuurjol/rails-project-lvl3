@@ -14,7 +14,7 @@ To run the application, do the following commands in your terminal window:
 * Clone the repository from GitHub and navigate to the application folder:
 ```
 git clone https://github.com/cuurjol/rails-project-lvl3.git
-cd rails-project-lvl2
+cd rails-project-lvl3
 ```
 
 * Install the necessary application gems specified in the `Gemfile`:
@@ -57,8 +57,8 @@ GOOGLE_SMTP_USER_NAME=GOOGLE_SMTP_USER_NAME
 GOOGLE_SMTP_PASSWORD=GOOGLE_SMTP_PASSWORD
 ```
 
-The application uses the `Gogole` and `Github` authentication from `Omniauth` gem, `Google` SMTP server
-and `Filebase` storage database for images.
+The application uses the `Google` and `Github` authentication from [Omniauth](https://github.com/omniauth/omniauth) gem,
+`Google` SMTP server and [Filebase](https://filebase.com/) storage database for images.
 
 * Launch the application (local server):
 ```
